@@ -1,0 +1,15 @@
+# sweep.yaml
+command: python train.py --sweep
+method: bayes
+metric:
+  name: val_acc
+  goal: maximize
+parameters:
+  num_epochs:
+    values: [5, 10, 15]
+  batch_size:
+    values: [1]
+  learning_rate:
+    values: [0.001, 0.01, 0.1]
+  optimizer:
+    values: ['Adam', 'SGD']

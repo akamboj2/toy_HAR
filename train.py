@@ -9,18 +9,54 @@ import os
 from torchvision.models import resnet18, ResNet18_Weights
 # import torchvideo.transforms as VT
 import wandb
-
-wandb.init(project='my-project-name')
-
 from timm.models.vision_transformer import vit_small_patch32_224
+from argparse import ArgumentParser
 
+# Parse command-line arguments
+parser = ArgumentParser()
+# parser.add_argument('--sweep', action='store_true')
+parser.add_argument('--batch_size', type=int, default=1)
+parser.add_argument('--num_epochs', type=int, default=50)
+parser.add_argument('--optimizer', type=str, default='Adam')
+parser.add_argument('--learning_rate', type=float, default=.001)
 
+args = parser.parse_args()
+
+# Define hyperparameters (note sweep overrides them)
 video_length = 16
-batch_size = 1
-num_epochs = 500
+# below are in confiug
+# batch_size = 1
+# num_epochs = 50
+# optimizer = 'Adam'
+# learning_rate=.001
+
+# Define the device for training
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device",device)
 torch.cuda.empty_cache()
+
+
+
+# start a new wandb run to track this script
+wandb.init(
+    # set the wandb project where this run will be logged
+    project="toy-HAR",
+    
+    # track hyperparameters and run metadata
+    config={
+    'num_epochs': args.num_epochs,
+    'batch_size': args.batch_size,
+    'learning_rate': args.learning_rate,
+    'optimizer': args.optimizer
+}
+)
+config = wandb.config
+
+# Define hyperparameters
+num_epochs = config.num_epochs
+batch_size = config.batch_size
+learning_rate = config.learning_rate
+optimizer = config.optimizer
 
 
 
@@ -138,51 +174,56 @@ class ActionRecognitionModel(nn.Module):
 model = ActionRecognitionModel(num_classes=27).to(device)  # Replace 27 with the number of action classes
 # print(model)
 
-# Define loss function and optimizer
+# Define the model, loss function, and optimizer
+model = ActionRecognitionModel(num_classes=27).to(device)
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+if optimizer == 'Adam':
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+elif optimizer == 'SGD':
+    optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
 
 
 # Define a variable to keep track of the highest validation accuracy achieved
 best_val_acc = 0.0
 
-# Log the loss to wandb
-wandb.log({'train_loss': running_loss / len(train_loader)})
+if __name__ == '__main__':
+    # Training loop
+    for epoch in range(num_epochs):
+        model.train()
+        running_loss = 0.0
 
-# Training loop
-for epoch in range(num_epochs):
-    model.train()
-    running_loss = 0.0
+        for inputs, labels in tqdm(train_loader):
+            optimizer.zero_grad()
+            outputs = model(inputs.to(device))
+            loss = criterion(outputs.cpu(), labels)
+            loss.backward()
+            optimizer.step()
+            running_loss += loss.item()
 
-    for inputs, labels in tqdm(train_loader):
-        optimizer.zero_grad()
-        outputs = model(inputs.to(device))
-        loss = criterion(outputs.cpu(), labels)
-        loss.backward()
-        optimizer.step()
-        running_loss += loss.item()
+        # Print the average loss for this epoch
+        print(f'Epoch [{epoch+1}/{num_epochs}] Loss: {running_loss / len(train_loader)}')
+        # Log the loss to wandb
+        wandb.log({'train_loss': running_loss / len(train_loader)})
 
-    # Print the average loss for this epoch
-    print(f'Epoch [{epoch+1}/{num_epochs}] Loss: {running_loss / len(train_loader)}')
+        if (epoch+1)%2 == 0:
+            model.eval()
+            total_acc=0.
+            for val_inputs,val_labels in tqdm(val_loader):
+                out = model(val_inputs.to(device))
+                pred = out.cpu().type(torch.int).argmax(dim=-1)
+                acc = sum(torch.eq(val_labels,pred))/float(len(val_labels))
+                total_acc+=acc
+            total_acc/=len(val_loader)
+            print(f'Val on [{epoch+1}] Acc: {total_acc}')
 
-    if (epoch+1)%2 == 0:
-        model.eval()
-        total_acc=0.
-        for val_inputs,val_labels in tqdm(val_loader):
-            out = model(val_inputs.to(device))
-            pred = out.cpu().type(torch.int).argmax(dim=-1)
-            acc = sum(torch.eq(val_labels,pred))/float(len(val_labels))
-            total_acc+=acc
-        total_acc/=len(val_loader)
-        print(f'Val on [{epoch+1}] Acc: {total_acc}')
+            # Check if this is the best validation accuracy achieved so far
+            if total_acc > best_val_acc:
+                best_val_acc = total_acc
+                # Save the model state with the best validation accuracy
+                checkpoint_path = f'rgb/best_checkpoint_FE_{best_val_acc:.2f}.pt'
+                torch.save(model.state_dict(), checkpoint_path)
 
-        # Check if this is the best validation accuracy achieved so far
-        if total_acc > best_val_acc:
-            best_val_acc = total_acc
-            # Save the model state with the best validation accuracy
-            torch.save(model.state_dict(), f'rgb/best_checkpoint_FE_{best_val_acc:.2f}.pt')
-
-print(f'Training finished, best validation accuracy: {best_val_acc:.2f}, saved model checkpoint: {checkpoint_path}')
+    print(f'Training finished, best validation accuracy: {best_val_acc:.2f}, saved model checkpoint: {checkpoint_path}')
 
 
 
