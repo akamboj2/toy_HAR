@@ -1,0 +1,922 @@
+2023-10-11 12:07:27,723 INFO    StreamThr :2234886 [internal.py:wandb_internal():86] W&B internal server running at pid: 2234886, started at: 2023-10-11 12:07:27.722997
+2023-10-11 12:07:27,724 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: status
+2023-10-11 12:07:27,727 INFO    WriterThread:2234886 [datastore.py:open_for_write():85] open: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/run-5v1ik2wq.wandb
+2023-10-11 12:07:27,727 DEBUG   SenderThread:2234886 [sender.py:send():380] send: header
+2023-10-11 12:07:27,734 DEBUG   SenderThread:2234886 [sender.py:send():380] send: run
+2023-10-11 12:07:28,019 INFO    SenderThread:2234886 [dir_watcher.py:__init__():211] watching files in: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files
+2023-10-11 12:07:28,020 INFO    SenderThread:2234886 [sender.py:_start_run_threads():1122] run started: 5v1ik2wq with start time 1697044047.722933
+2023-10-11 12:07:28,030 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: check_version
+2023-10-11 12:07:28,030 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: check_version
+2023-10-11 12:07:28,124 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: run_start
+2023-10-11 12:07:28,130 DEBUG   HandlerThread:2234886 [system_info.py:__init__():32] System info init
+2023-10-11 12:07:28,130 DEBUG   HandlerThread:2234886 [system_info.py:__init__():47] System info init done
+2023-10-11 12:07:28,130 INFO    HandlerThread:2234886 [system_monitor.py:start():194] Starting system monitor
+2023-10-11 12:07:28,130 INFO    SystemMonitor:2234886 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-11 12:07:28,130 INFO    HandlerThread:2234886 [system_monitor.py:probe():214] Collecting system info
+2023-10-11 12:07:28,130 INFO    SystemMonitor:2234886 [interfaces.py:start():190] Started cpu monitoring
+2023-10-11 12:07:28,131 INFO    SystemMonitor:2234886 [interfaces.py:start():190] Started disk monitoring
+2023-10-11 12:07:28,131 INFO    SystemMonitor:2234886 [interfaces.py:start():190] Started gpu monitoring
+2023-10-11 12:07:28,132 INFO    SystemMonitor:2234886 [interfaces.py:start():190] Started memory monitoring
+2023-10-11 12:07:28,132 INFO    SystemMonitor:2234886 [interfaces.py:start():190] Started network monitoring
+2023-10-11 12:07:28,143 DEBUG   HandlerThread:2234886 [system_info.py:probe():196] Probing system
+2023-10-11 12:07:28,147 DEBUG   HandlerThread:2234886 [system_info.py:_probe_git():181] Probing git
+2023-10-11 12:07:28,153 DEBUG   HandlerThread:2234886 [system_info.py:_probe_git():189] Probing git done
+2023-10-11 12:07:28,153 DEBUG   HandlerThread:2234886 [system_info.py:probe():244] Probing system done
+2023-10-11 12:07:28,153 DEBUG   HandlerThread:2234886 [system_monitor.py:probe():223] {'os': 'Linux-6.2.0-33-generic-x86_64-with-glibc2.35', 'python': '3.9.13', 'heartbeatAt': '2023-10-11T17:07:28.143817', 'startedAt': '2023-10-11T17:07:27.718631', 'docker': None, 'cuda': None, 'args': ('--batch_size=60', '--learning_rate=0.005633534835749396', '--num_epochs=117', '--optimizer=Adam'), 'state': 'running', 'program': '/home/abhi/research/action_recognition/toy_HAR/IMU/train.py', 'codePathLocal': 'train.py', 'codePath': 'IMU/train.py', 'git': {'remote': 'https://github.com/akamboj2/toy_HAR.git', 'commit': '9937b230de58c8ccc57da955c849ce413fe861db'}, 'email': 'akamboj2@illinois.edu', 'root': '/home/abhi/research/action_recognition/toy_HAR', 'host': 'abhi-MS-7C56', 'username': 'abhi', 'executable': '/home/abhi/anaconda3/envs/cv/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 3.1388125000000002, 'min': 2200.0, 'max': 3800.0}, 'cpu_freq_per_core': [{'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 3.709, 'min': 2200.0, 'max': 3800.0}, {'current': 4.849, 'min': 2200.0, 'max': 3800.0}, {'current': 4.406, 'min': 2200.0, 'max': 3800.0}, {'current': 3.774, 'min': 2200.0, 'max': 3800.0}, {'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 3.879, 'min': 2200.0, 'max': 3800.0}, {'current': 3.359, 'min': 2200.0, 'max': 3800.0}, {'current': 3.872, 'min': 2200.0, 'max': 3800.0}, {'current': 3.182, 'min': 2200.0, 'max': 3800.0}, {'current': 3.365, 'min': 2200.0, 'max': 3800.0}, {'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 4.148, 'min': 2200.0, 'max': 3800.0}, {'current': 3.748, 'min': 2200.0, 'max': 3800.0}, {'current': 3.874, 'min': 2200.0, 'max': 3800.0}], 'disk': {'/': {'total': 915.3232879638672, 'used': 534.0848617553711}}, 'gpu': 'NVIDIA GeForce RTX 3080', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3080', 'memory_total': 10737418240}], 'memory': {'total': 31.258052825927734}}
+2023-10-11 12:07:28,153 INFO    HandlerThread:2234886 [system_monitor.py:probe():224] Finished collecting system info
+2023-10-11 12:07:28,153 INFO    HandlerThread:2234886 [system_monitor.py:probe():227] Publishing system info
+2023-10-11 12:07:28,153 DEBUG   HandlerThread:2234886 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-10-11 12:07:28,153 DEBUG   HandlerThread:2234886 [system_info.py:_save_pip():68] Saving pip packages done
+2023-10-11 12:07:28,153 DEBUG   HandlerThread:2234886 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-10-11 12:07:29,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/conda-environment.yaml
+2023-10-11 12:07:29,051 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/requirements.txt
+2023-10-11 12:07:30,424 DEBUG   HandlerThread:2234886 [system_info.py:_save_conda():87] Saving conda packages done
+2023-10-11 12:07:30,425 INFO    HandlerThread:2234886 [system_monitor.py:probe():229] Finished publishing system info
+2023-10-11 12:07:30,430 DEBUG   SenderThread:2234886 [sender.py:send():380] send: files
+2023-10-11 12:07:30,430 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-10-11 12:07:30,433 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-11 12:07:30,434 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: stop_status
+2023-10-11 12:07:30,435 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-11 12:07:30,586 DEBUG   SenderThread:2234886 [sender.py:send():380] send: telemetry
+2023-10-11 12:07:30,818 INFO    wandb-upload_0:2234886 [upload_job.py:push():131] Uploaded file /tmp/tmpj3y5loa1wandb/393ri8ot-wandb-metadata.json
+2023-10-11 12:07:31,020 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/conda-environment.yaml
+2023-10-11 12:07:31,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-metadata.json
+2023-10-11 12:07:31,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:31,873 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:31,873 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:31,873 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:31,875 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:32,048 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,049 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,049 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,049 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,147 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,148 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,148 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,148 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,323 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,324 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,324 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,324 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,500 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,500 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,500 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,500 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,527 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,528 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,528 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,528 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,701 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,702 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,702 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,702 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,742 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: status_report
+2023-10-11 12:07:32,874 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,875 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,875 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,875 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:32,902 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:32,902 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:32,902 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:32,906 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:33,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:33,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:33,077 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:33,078 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:33,078 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:33,078 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:33,250 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:33,250 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:33,251 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:33,251 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:33,278 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:33,278 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:33,278 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:33,282 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:33,451 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:33,451 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:33,451 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:33,451 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:33,625 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:33,626 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:33,626 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:33,626 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:33,653 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:33,653 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:33,653 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:33,657 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:33,826 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:33,826 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:33,827 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:33,827 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,001 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,001 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,001 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,003 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:34,028 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,029 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,029 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,029 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,204 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,204 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,204 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,228 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,381 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,382 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,382 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,382 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,409 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,409 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,409 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,413 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,586 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,586 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,586 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,587 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,760 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,761 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,761 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,761 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,788 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,788 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,788 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,792 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:34,962 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:34,984 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:34,984 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:34,984 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:35,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:35,137 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,137 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,137 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,137 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,164 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,165 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,165 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,168 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,338 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,339 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,339 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,339 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,517 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,517 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,517 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,518 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,544 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,545 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,545 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,548 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,719 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,719 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,719 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,719 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,894 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,894 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,894 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,894 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:35,921 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:35,922 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:35,922 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:35,925 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:36,021 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:36,098 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:36,098 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:36,098 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:36,100 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:36,273 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:36,273 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:36,273 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:36,273 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:36,300 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:36,301 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:36,301 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:36,301 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:36,483 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:36,483 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:36,483 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:36,483 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:36,656 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:36,657 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:36,657 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:36,657 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:36,684 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:36,684 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:36,684 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:36,688 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:36,862 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:36,863 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:36,863 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:36,863 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,022 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:37,022 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:37,043 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,043 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,043 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,043 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,070 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,070 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,071 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,071 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,250 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,251 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,251 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,251 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,430 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,431 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,431 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,431 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,459 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,459 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,459 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,462 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,641 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,641 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,641 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,641 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,742 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: status_report
+2023-10-11 12:07:37,816 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,816 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,816 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,816 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:37,843 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:37,843 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:37,844 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:37,847 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,021 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,021 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,021 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,022 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,022 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:38,195 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,195 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,195 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,197 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,224 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,233 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,233 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,233 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,405 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,405 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,405 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,406 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,584 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,584 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,584 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,584 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,611 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,611 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,611 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,615 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,786 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,786 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,786 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,786 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,965 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,965 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,965 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,965 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:38,994 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:38,994 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:38,994 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:38,997 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:39,022 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:39,022 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:39,175 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:39,176 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:39,176 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:39,176 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:39,356 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:39,356 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:39,356 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:39,356 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:39,384 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:39,384 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:39,384 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:39,388 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:39,559 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:39,559 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:39,560 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:39,560 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:39,733 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:39,733 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:39,733 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:39,733 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:39,763 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:39,763 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:39,763 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:39,764 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:39,936 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:39,937 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:39,937 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:39,937 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,022 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:40,112 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,112 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,112 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,116 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,142 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,142 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,142 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,142 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,315 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,315 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,315 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,317 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,491 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,492 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,492 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,492 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,518 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,519 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,519 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,533 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,691 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,692 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,692 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,692 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,865 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,865 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,865 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,865 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:40,892 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:40,892 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:40,892 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:40,897 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,022 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:41,023 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:41,068 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,068 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,068 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,068 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,241 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,241 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,241 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,242 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,268 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,268 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,268 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,273 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,441 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,442 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,442 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,442 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,616 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,616 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,616 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,617 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,643 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,643 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,643 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,648 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,816 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,816 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,816 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,816 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:41,991 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:41,991 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:41,991 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:41,991 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,018 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,018 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,018 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,023 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:42,023 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,191 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,191 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,192 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,192 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,364 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,365 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,365 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,366 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,391 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,392 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,392 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,397 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,566 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,566 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,566 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,566 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,739 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,739 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,739 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,740 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,766 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,766 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: status_report
+2023-10-11 12:07:42,766 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,766 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,770 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:42,938 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:42,939 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:42,939 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:42,939 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,023 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:43,023 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:43,113 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,114 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,114 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,114 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,141 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,141 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,141 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,145 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,314 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,314 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,314 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,314 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,488 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,488 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,488 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,488 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,515 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,515 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,515 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,519 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,688 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,688 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,688 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,689 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,861 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,862 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,862 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,862 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:43,888 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:43,889 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:43,889 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:43,893 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,023 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:44,063 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,063 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,063 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,064 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,236 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,237 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,237 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,237 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,263 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,264 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,264 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,268 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,436 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,437 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,437 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,438 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,613 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,613 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,613 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,613 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,640 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,640 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,640 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,644 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,813 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,813 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,814 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,814 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:44,987 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:44,988 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:44,988 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:44,988 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,014 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,014 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,015 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,019 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,023 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:45,023 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:45,187 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,188 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,188 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,188 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,360 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,361 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,361 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,361 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,387 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,388 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,388 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,392 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,433 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-11 12:07:45,434 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: stop_status
+2023-10-11 12:07:45,435 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-11 12:07:45,566 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,566 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,566 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,567 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,740 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,740 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,740 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,740 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,767 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,767 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,767 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,771 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:45,940 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:45,940 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:45,940 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:45,940 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,024 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:46,114 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,114 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,114 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,114 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,141 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,141 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,141 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,145 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,314 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,314 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,314 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,315 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,489 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,489 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,490 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,491 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,516 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,516 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,517 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,522 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,689 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,690 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,690 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,690 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,863 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,863 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,863 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,863 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:46,890 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:46,890 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:46,890 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:46,894 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,024 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:47,024 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:47,064 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,064 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,064 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,064 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,237 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,237 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,238 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,238 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,264 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,265 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,265 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,268 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,438 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,438 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,438 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,438 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,612 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,612 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,612 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,613 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,639 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,639 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,639 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,644 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,780 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: status_report
+2023-10-11 12:07:47,812 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,812 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,812 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,812 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:47,987 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:47,987 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:47,987 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:47,987 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,014 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,014 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,014 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,014 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,024 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:48,187 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,187 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,187 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,187 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,360 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,360 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,360 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,360 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,387 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,387 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,387 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,391 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,561 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,561 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,561 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,563 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,734 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,735 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,735 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,735 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,761 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,762 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,762 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,766 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:48,934 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:48,935 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:48,935 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:48,935 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,024 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:49,024 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:49,110 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,110 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,110 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,110 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,137 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,137 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,137 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,141 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,310 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,310 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,311 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,311 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,485 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,486 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,486 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,486 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,512 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,513 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,513 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,517 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,692 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,692 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,692 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,692 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,867 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,868 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,868 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,868 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:49,896 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:49,896 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:49,896 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:49,899 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:50,024 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:50,079 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:50,079 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:50,079 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:50,079 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:50,261 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:50,262 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:50,262 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:50,262 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:50,290 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:50,290 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:50,290 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:50,293 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:50,473 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:50,473 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:50,473 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:50,473 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:50,656 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:50,656 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:50,656 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:50,656 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:50,684 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:50,684 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:50,685 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:50,687 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:50,866 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:50,866 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:50,866 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:50,867 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,025 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:51,025 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:51,051 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,051 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,051 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,051 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,079 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,079 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,080 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,082 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,261 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,261 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,262 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,262 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,444 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,444 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,444 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,444 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,473 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,473 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,474 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,476 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,656 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,656 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,657 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,657 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,839 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,839 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,839 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,839 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:51,867 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:51,867 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:51,868 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:51,871 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:52,025 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:52,051 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:52,052 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:52,052 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:52,052 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:52,235 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:52,235 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:52,235 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:52,235 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:52,263 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:52,264 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:52,264 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:52,266 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:52,445 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:52,445 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:52,445 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:52,446 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:52,627 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:52,627 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:52,627 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:52,627 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:52,655 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:52,656 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:52,656 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:52,658 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:52,782 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: status_report
+2023-10-11 12:07:52,837 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:52,837 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:52,838 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:52,838 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,019 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,020 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,020 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,020 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,025 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:53,025 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:53,048 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,048 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,048 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,051 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,230 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,230 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,230 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,230 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,413 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,413 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,413 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,413 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,441 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,442 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,442 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,444 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,616 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,617 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,617 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,617 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,790 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,790 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,790 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,790 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,817 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,817 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,817 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,821 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:53,998 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-11 12:07:53,999 DEBUG   SenderThread:2234886 [sender.py:send():380] send: history
+2023-10-11 12:07:53,999 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: summary_record
+2023-10-11 12:07:53,999 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:54,000 DEBUG   SenderThread:2234886 [sender.py:send():380] send: exit
+2023-10-11 12:07:54,000 INFO    SenderThread:2234886 [sender.py:send_exit():585] handling exit code: 0
+2023-10-11 12:07:54,000 INFO    SenderThread:2234886 [sender.py:send_exit():587] handling runtime: 25
+2023-10-11 12:07:54,025 INFO    Thread-12 :2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:54,030 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:54,030 INFO    SenderThread:2234886 [sender.py:send_exit():593] send defer
+2023-10-11 12:07:54,030 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,030 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 0
+2023-10-11 12:07:54,030 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,030 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-10-11 12:07:54,030 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 1
+2023-10-11 12:07:54,030 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,030 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 1
+2023-10-11 12:07:54,030 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,030 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-10-11 12:07:54,030 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 2
+2023-10-11 12:07:54,030 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,030 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 2
+2023-10-11 12:07:54,030 INFO    HandlerThread:2234886 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-11 12:07:54,030 DEBUG   SystemMonitor:2234886 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-11 12:07:54,031 INFO    HandlerThread:2234886 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-11 12:07:54,031 DEBUG   SystemMonitor:2234886 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-11 12:07:54,031 INFO    HandlerThread:2234886 [interfaces.py:finish():202] Joined disk monitor
+2023-10-11 12:07:54,031 DEBUG   SystemMonitor:2234886 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-11 12:07:54,068 INFO    HandlerThread:2234886 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-11 12:07:54,069 INFO    HandlerThread:2234886 [interfaces.py:finish():202] Joined memory monitor
+2023-10-11 12:07:54,069 INFO    HandlerThread:2234886 [interfaces.py:finish():202] Joined network monitor
+2023-10-11 12:07:54,069 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,069 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-10-11 12:07:54,069 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 3
+2023-10-11 12:07:54,069 DEBUG   SenderThread:2234886 [sender.py:send():380] send: stats
+2023-10-11 12:07:54,069 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,069 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 3
+2023-10-11 12:07:54,070 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 4
+2023-10-11 12:07:54,070 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,070 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 4
+2023-10-11 12:07:54,070 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 5
+2023-10-11 12:07:54,070 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,070 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 5
+2023-10-11 12:07:54,070 DEBUG   SenderThread:2234886 [sender.py:send():380] send: summary
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-11 12:07:54,070 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 6
+2023-10-11 12:07:54,070 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,070 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 6
+2023-10-11 12:07:54,070 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,070 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-10-11 12:07:54,074 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: status_report
+2023-10-11 12:07:54,152 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 7
+2023-10-11 12:07:54,152 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,152 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 7
+2023-10-11 12:07:54,153 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,153 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-10-11 12:07:54,660 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 8
+2023-10-11 12:07:54,661 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,661 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 8
+2023-10-11 12:07:54,661 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,661 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-10-11 12:07:54,661 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 9
+2023-10-11 12:07:54,661 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:54,661 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 9
+2023-10-11 12:07:54,661 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:54,661 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-10-11 12:07:54,661 INFO    SenderThread:2234886 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-10-11 12:07:55,000 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: poll_exit
+2023-10-11 12:07:55,026 INFO    SenderThread:2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:55,026 INFO    SenderThread:2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:55,026 INFO    SenderThread:2234886 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/config.yaml
+2023-10-11 12:07:55,026 INFO    SenderThread:2234886 [dir_watcher.py:finish():388] scan: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files
+2023-10-11 12:07:55,027 INFO    SenderThread:2234886 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/conda-environment.yaml conda-environment.yaml
+2023-10-11 12:07:55,027 INFO    SenderThread:2234886 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/config.yaml config.yaml
+2023-10-11 12:07:55,027 INFO    SenderThread:2234886 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log output.log
+2023-10-11 12:07:55,027 INFO    SenderThread:2234886 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json wandb-summary.json
+2023-10-11 12:07:55,027 INFO    SenderThread:2234886 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/requirements.txt requirements.txt
+2023-10-11 12:07:55,027 INFO    SenderThread:2234886 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-metadata.json wandb-metadata.json
+2023-10-11 12:07:55,027 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 10
+2023-10-11 12:07:55,027 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: poll_exit
+2023-10-11 12:07:55,028 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:55,028 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 10
+2023-10-11 12:07:55,032 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:55,032 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-10-11 12:07:55,032 INFO    SenderThread:2234886 [file_pusher.py:finish():175] shutting down file pusher
+2023-10-11 12:07:55,267 INFO    wandb-upload_1:2234886 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/config.yaml
+2023-10-11 12:07:55,347 INFO    wandb-upload_0:2234886 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/conda-environment.yaml
+2023-10-11 12:07:55,419 INFO    wandb-upload_4:2234886 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/requirements.txt
+2023-10-11 12:07:55,425 INFO    wandb-upload_3:2234886 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/wandb-summary.json
+2023-10-11 12:07:55,472 INFO    wandb-upload_2:2234886 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/files/output.log
+2023-10-11 12:07:55,672 INFO    Thread-11 :2234886 [sender.py:transition_state():613] send defer: 11
+2023-10-11 12:07:55,672 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:55,672 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 11
+2023-10-11 12:07:55,673 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:55,673 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-10-11 12:07:55,673 INFO    SenderThread:2234886 [file_pusher.py:join():181] waiting for file pusher
+2023-10-11 12:07:55,673 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 12
+2023-10-11 12:07:55,673 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:55,673 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 12
+2023-10-11 12:07:55,673 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:55,673 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-10-11 12:07:55,673 INFO    SenderThread:2234886 [file_stream.py:finish():595] file stream finish called
+2023-10-11 12:07:55,739 INFO    SenderThread:2234886 [file_stream.py:finish():599] file stream finish is done
+2023-10-11 12:07:55,739 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 13
+2023-10-11 12:07:55,739 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:55,739 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 13
+2023-10-11 12:07:55,739 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:55,740 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-10-11 12:07:55,740 INFO    SenderThread:2234886 [sender.py:transition_state():613] send defer: 14
+2023-10-11 12:07:55,740 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: defer
+2023-10-11 12:07:55,740 INFO    HandlerThread:2234886 [handler.py:handle_request_defer():172] handle defer: 14
+2023-10-11 12:07:55,740 DEBUG   SenderThread:2234886 [sender.py:send():380] send: final
+2023-10-11 12:07:55,740 DEBUG   SenderThread:2234886 [sender.py:send():380] send: footer
+2023-10-11 12:07:55,740 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: defer
+2023-10-11 12:07:55,740 INFO    SenderThread:2234886 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-10-11 12:07:55,741 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: poll_exit
+2023-10-11 12:07:55,741 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: poll_exit
+2023-10-11 12:07:55,741 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: poll_exit
+2023-10-11 12:07:55,741 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: poll_exit
+2023-10-11 12:07:55,741 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: server_info
+2023-10-11 12:07:55,742 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: server_info
+2023-10-11 12:07:55,742 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: get_summary
+2023-10-11 12:07:55,745 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: sampled_history
+2023-10-11 12:07:55,745 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-11 12:07:55,746 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: job_info
+2023-10-11 12:07:55,793 DEBUG   SenderThread:2234886 [sender.py:send_request():407] send_request: job_info
+2023-10-11 12:07:55,794 INFO    MainThread:2234886 [wandb_run.py:_footer_history_summary_info():3599] rendering history
+2023-10-11 12:07:55,794 INFO    MainThread:2234886 [wandb_run.py:_footer_history_summary_info():3631] rendering summary
+2023-10-11 12:07:55,794 INFO    MainThread:2234886 [wandb_run.py:_footer_sync_info():3558] logging synced files
+2023-10-11 12:07:55,794 DEBUG   HandlerThread:2234886 [handler.py:handle_request():146] handle_request: shutdown
+2023-10-11 12:07:55,795 INFO    HandlerThread:2234886 [handler.py:finish():866] shutting down handler
+2023-10-11 12:07:56,746 INFO    WriterThread:2234886 [datastore.py:close():294] close: /home/abhi/research/action_recognition/toy_HAR/IMU/wandb/run-20231011_120727-5v1ik2wq/run-5v1ik2wq.wandb
+2023-10-11 12:07:56,794 INFO    SenderThread:2234886 [sender.py:finish():1534] shutting down sender
+2023-10-11 12:07:56,794 INFO    SenderThread:2234886 [file_pusher.py:finish():175] shutting down file pusher
+2023-10-11 12:07:56,794 INFO    SenderThread:2234886 [file_pusher.py:join():181] waiting for file pusher

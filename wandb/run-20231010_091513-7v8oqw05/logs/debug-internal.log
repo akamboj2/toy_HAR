@@ -1,0 +1,1108 @@
+2023-10-10 09:15:13,799 INFO    StreamThr :1703212 [internal.py:wandb_internal():86] W&B internal server running at pid: 1703212, started at: 2023-10-10 09:15:13.798683
+2023-10-10 09:15:13,799 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status
+2023-10-10 09:15:13,804 INFO    WriterThread:1703212 [datastore.py:open_for_write():85] open: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/run-7v8oqw05.wandb
+2023-10-10 09:15:13,804 DEBUG   SenderThread:1703212 [sender.py:send():380] send: header
+2023-10-10 09:15:13,813 DEBUG   SenderThread:1703212 [sender.py:send():380] send: run
+2023-10-10 09:15:14,076 INFO    SenderThread:1703212 [dir_watcher.py:__init__():211] watching files in: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files
+2023-10-10 09:15:14,076 INFO    SenderThread:1703212 [sender.py:_start_run_threads():1122] run started: 7v8oqw05 with start time 1696947313.798639
+2023-10-10 09:15:14,086 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: check_version
+2023-10-10 09:15:14,086 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: check_version
+2023-10-10 09:15:14,188 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: run_start
+2023-10-10 09:15:14,194 DEBUG   HandlerThread:1703212 [system_info.py:__init__():32] System info init
+2023-10-10 09:15:14,195 DEBUG   HandlerThread:1703212 [system_info.py:__init__():47] System info init done
+2023-10-10 09:15:14,195 INFO    HandlerThread:1703212 [system_monitor.py:start():194] Starting system monitor
+2023-10-10 09:15:14,195 INFO    SystemMonitor:1703212 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-10 09:15:14,195 INFO    HandlerThread:1703212 [system_monitor.py:probe():214] Collecting system info
+2023-10-10 09:15:14,195 INFO    SystemMonitor:1703212 [interfaces.py:start():190] Started cpu monitoring
+2023-10-10 09:15:14,196 INFO    SystemMonitor:1703212 [interfaces.py:start():190] Started disk monitoring
+2023-10-10 09:15:14,196 INFO    SystemMonitor:1703212 [interfaces.py:start():190] Started gpu monitoring
+2023-10-10 09:15:14,197 INFO    SystemMonitor:1703212 [interfaces.py:start():190] Started memory monitoring
+2023-10-10 09:15:14,197 INFO    SystemMonitor:1703212 [interfaces.py:start():190] Started network monitoring
+2023-10-10 09:15:14,206 DEBUG   HandlerThread:1703212 [system_info.py:probe():196] Probing system
+2023-10-10 09:15:14,210 DEBUG   HandlerThread:1703212 [system_info.py:_probe_git():181] Probing git
+2023-10-10 09:15:14,215 DEBUG   HandlerThread:1703212 [system_info.py:_probe_git():189] Probing git done
+2023-10-10 09:15:14,216 DEBUG   HandlerThread:1703212 [system_info.py:probe():244] Probing system done
+2023-10-10 09:15:14,216 DEBUG   HandlerThread:1703212 [system_monitor.py:probe():223] {'os': 'Linux-6.2.0-33-generic-x86_64-with-glibc2.35', 'python': '3.9.13', 'heartbeatAt': '2023-10-10T14:15:14.206240', 'startedAt': '2023-10-10T14:15:13.791651', 'docker': None, 'cuda': None, 'args': ('--batch_size=1', '--learning_rate=0.001', '--num_epochs=15', '--optimizer=SGD'), 'state': 'running', 'program': '/home/abhi/research/action_recognition/toy_HAR/train.py', 'codePathLocal': 'train.py', 'codePath': 'train.py', 'git': {'remote': 'https://github.com/akamboj2/toy_HAR.git', 'commit': '9937b230de58c8ccc57da955c849ce413fe861db'}, 'email': 'akamboj2@illinois.edu', 'root': '/home/abhi/research/action_recognition/toy_HAR', 'host': 'abhi-MS-7C56', 'username': 'abhi', 'executable': '/home/abhi/anaconda3/envs/cv/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 3.087625, 'min': 2200.0, 'max': 3800.0}, 'cpu_freq_per_core': [{'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 4.012, 'min': 2200.0, 'max': 3800.0}, {'current': 2.975, 'min': 2200.0, 'max': 3800.0}, {'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 3.816, 'min': 2200.0, 'max': 3800.0}, {'current': 3.363, 'min': 2200.0, 'max': 3800.0}, {'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 3.732, 'min': 2200.0, 'max': 3800.0}, {'current': 3.8, 'min': 2200.0, 'max': 3800.0}, {'current': 3.328, 'min': 2200.0, 'max': 3800.0}, {'current': 2.982, 'min': 2200.0, 'max': 3800.0}, {'current': 2.2, 'min': 2200.0, 'max': 3800.0}, {'current': 3.33, 'min': 2200.0, 'max': 3800.0}, {'current': 3.934, 'min': 2200.0, 'max': 3800.0}, {'current': 3.13, 'min': 2200.0, 'max': 3800.0}], 'disk': {'/': {'total': 915.3232879638672, 'used': 532.1016387939453}}, 'gpu': 'NVIDIA GeForce RTX 3080', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3080', 'memory_total': 10737418240}], 'memory': {'total': 31.258052825927734}}
+2023-10-10 09:15:14,216 INFO    HandlerThread:1703212 [system_monitor.py:probe():224] Finished collecting system info
+2023-10-10 09:15:14,216 INFO    HandlerThread:1703212 [system_monitor.py:probe():227] Publishing system info
+2023-10-10 09:15:14,216 DEBUG   HandlerThread:1703212 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-10-10 09:15:14,216 DEBUG   HandlerThread:1703212 [system_info.py:_save_pip():68] Saving pip packages done
+2023-10-10 09:15:14,216 DEBUG   HandlerThread:1703212 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-10-10 09:15:15,077 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/conda-environment.yaml
+2023-10-10 09:15:15,077 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/requirements.txt
+2023-10-10 09:15:16,526 DEBUG   HandlerThread:1703212 [system_info.py:_save_conda():87] Saving conda packages done
+2023-10-10 09:15:16,526 INFO    HandlerThread:1703212 [system_monitor.py:probe():229] Finished publishing system info
+2023-10-10 09:15:16,531 DEBUG   SenderThread:1703212 [sender.py:send():380] send: files
+2023-10-10 09:15:16,531 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-10-10 09:15:16,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:15:16,536 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:15:16,538 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:15:16,811 DEBUG   SenderThread:1703212 [sender.py:send():380] send: telemetry
+2023-10-10 09:15:16,926 INFO    wandb-upload_0:1703212 [upload_job.py:push():131] Uploaded file /tmp/tmpak8ofl3vwandb/euy000mw-wandb-metadata.json
+2023-10-10 09:15:17,077 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/conda-environment.yaml
+2023-10-10 09:15:17,077 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-metadata.json
+2023-10-10 09:15:18,077 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:18,809 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:20,078 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:22,078 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:23,891 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:24,079 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:26,079 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:28,079 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:29,002 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:30,080 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:31,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:15:31,557 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:15:31,558 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:15:32,080 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:34,011 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:34,081 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:36,081 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:38,082 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:39,035 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:40,082 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:42,083 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:44,083 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:44,188 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:45,083 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/config.yaml
+2023-10-10 09:15:46,084 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:46,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:15:46,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:15:46,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:15:48,084 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:49,337 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:50,085 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:52,085 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:54,086 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:54,344 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:15:56,086 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:58,087 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:15:59,367 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:00,087 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:01,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:16:01,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:16:01,536 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:16:02,087 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:04,088 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:04,447 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:06,089 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:08,089 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:09,465 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:09,465 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:16:09,514 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:16:09,514 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:16:09,514 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:16:10,090 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:10,090 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_created():271] file/dir created: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:16:12,090 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:14,091 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:14,197 DEBUG   SystemMonitor:1703212 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-10 09:16:14,198 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:16:14,481 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:16,092 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:16,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:16:16,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:16:16,536 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:16:18,092 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:19,505 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:20,093 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:22,093 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:24,094 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:24,515 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:26,094 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:28,094 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:29,572 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:30,095 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:31,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:16:31,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:16:31,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:16:32,095 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:34,096 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:34,605 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:36,096 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:38,097 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:39,731 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:40,097 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:42,098 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:44,098 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:44,199 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:16:44,745 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:46,099 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:46,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:16:46,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:16:46,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:16:48,099 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:49,750 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:50,100 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:52,100 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:54,101 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:54,766 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:56,101 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:58,102 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:16:59,932 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:16:59,971 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:16:59,972 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:16:59,972 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:16:59,972 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:17:00,102 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:17:00,103 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:01,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:17:01,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:17:01,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:17:02,103 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:04,103 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:04,972 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:06,104 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:08,104 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:10,017 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:10,105 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:12,105 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:12,602 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:17:12,603 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:17:12,603 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:17:12,603 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:17:13,105 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:17:14,106 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:14,199 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:17:15,119 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:16,106 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:16,536 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:17:16,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:17:16,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:17:18,106 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:20,107 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:20,132 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:22,107 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:24,108 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:25,234 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:26,108 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:28,109 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:30,109 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:30,246 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:31,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:17:31,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:17:31,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:17:32,110 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:34,110 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:35,362 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:36,111 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:38,111 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:40,112 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:40,511 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:42,112 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:44,113 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:44,200 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:17:45,655 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:46,113 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:46,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:17:46,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:17:46,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:17:48,114 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:50,114 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:50,687 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:52,115 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:54,115 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:55,784 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:17:56,116 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:17:58,116 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:00,117 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:00,888 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:01,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:18:01,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:18:01,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:18:02,117 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:04,118 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:04,758 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:18:04,759 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:18:04,759 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:18:04,759 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:18:05,118 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:18:05,926 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:06,118 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:08,119 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:10,119 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:11,066 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:12,119 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:14,120 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:14,200 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:18:16,117 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:16,120 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:16,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:18:16,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:18:16,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:18:18,121 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:20,122 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:21,127 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:23,122 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:25,123 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:26,162 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:27,123 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:29,124 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:31,124 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:31,235 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:31,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:18:31,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:18:31,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:18:33,125 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:35,125 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:36,289 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:37,126 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:39,126 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:41,126 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:41,367 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:43,127 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:44,201 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:18:45,127 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:46,372 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:46,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:18:46,537 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:18:46,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:18:47,128 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:49,128 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:51,129 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:51,397 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:53,129 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:55,130 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:56,431 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:18:56,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:18:56,588 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:18:56,588 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:18:56,588 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:18:57,130 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:18:57,130 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:58,130 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:18:59,130 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:01,131 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:01,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:19:01,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:19:01,538 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:19:01,676 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:03,131 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:05,132 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:06,799 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:07,132 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:09,133 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:09,193 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:19:09,194 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:19:09,194 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:19:09,194 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:19:10,133 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:19:11,133 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:11,922 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:12,134 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:13,134 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:14,201 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:19:15,134 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:16,579 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:19:16,580 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:19:16,580 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:19:16,952 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:17,135 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:19,136 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:21,136 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:21,987 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:23,136 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:25,137 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:27,119 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:27,137 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:29,138 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:31,139 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:31,579 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:19:31,580 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:19:31,580 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:19:32,207 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:33,139 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:35,140 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:37,140 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:37,282 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:39,140 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:41,141 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:42,344 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:43,141 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:44,202 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:19:45,142 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:46,579 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:19:46,579 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:19:46,581 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:19:47,143 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:47,441 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:49,143 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:51,144 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:52,468 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:53,144 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:55,145 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:57,145 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:19:57,618 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:19:59,146 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:00,760 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:20:00,760 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:20:00,760 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:20:00,760 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:20:01,146 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:20:01,146 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:01,579 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:20:01,579 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:20:01,580 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:20:02,146 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:02,713 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:03,147 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:05,147 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:07,147 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:07,813 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:09,148 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:11,148 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:12,845 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:13,149 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:14,202 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:20:15,149 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:16,579 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:20:16,580 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:20:16,580 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:20:17,150 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:18,011 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:19,151 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:21,151 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:23,095 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:23,152 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:25,153 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:27,153 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:28,220 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:29,154 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:31,154 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:31,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:20:31,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:20:31,588 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:20:33,155 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:33,320 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:35,155 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:37,155 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:38,445 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:39,156 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:41,156 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:43,157 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:43,485 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:44,203 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:20:45,157 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:46,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:20:46,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:20:46,588 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:20:47,158 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:48,543 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:49,158 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:51,159 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:52,899 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:20:52,899 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:20:52,899 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:20:52,899 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:20:53,159 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:20:53,160 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:53,599 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:54,160 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:55,160 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:57,160 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:20:58,613 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:20:59,161 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:01,161 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:01,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:21:01,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:21:01,588 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:21:03,162 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:03,661 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:05,162 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:05,653 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:21:05,653 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:21:05,653 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:21:05,653 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:21:06,163 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:21:07,163 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:08,163 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:08,767 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:09,164 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:11,164 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:13,165 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:13,913 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:14,204 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:21:15,165 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:16,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:21:16,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:21:16,619 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:21:17,166 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:18,914 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:19,166 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:21,167 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:23,167 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:23,945 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:25,168 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:27,168 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:29,048 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:29,169 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:31,169 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:31,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:21:31,620 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:21:31,620 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:21:33,169 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:34,053 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:35,170 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:37,170 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:39,140 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:39,171 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:41,171 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:43,172 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:44,183 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:44,204 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:21:45,173 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:46,618 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:21:46,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:21:46,619 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:21:47,173 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:49,174 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:49,214 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:51,174 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:53,174 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:54,301 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:21:55,175 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:57,175 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:58,137 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:21:58,138 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:21:58,138 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:21:58,138 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:21:58,175 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:21:59,176 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:21:59,379 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:00,176 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:01,176 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:01,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:22:01,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:22:01,619 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:22:03,177 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:04,447 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:05,177 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:07,178 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:09,178 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:09,476 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:11,179 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:13,179 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:14,205 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:22:14,617 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:15,180 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:16,618 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:22:16,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:22:16,619 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:22:17,180 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:19,181 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:19,634 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:21,181 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:23,182 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:24,654 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:25,182 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:27,183 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:29,183 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:29,772 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:31,184 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:31,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:22:31,619 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:22:31,619 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:22:33,184 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:34,851 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:35,185 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:37,185 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:39,186 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:40,036 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:41,186 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:43,187 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:44,205 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:22:45,080 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:45,187 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:22:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:22:46,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:22:47,188 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:49,188 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:50,040 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:22:50,041 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:22:50,041 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:22:50,041 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:22:50,172 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:50,189 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:22:51,189 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:52,190 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:53,190 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:55,191 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:55,219 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:22:57,191 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:22:59,191 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:00,302 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:01,192 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:23:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:23:01,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:23:02,760 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:23:02,761 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:23:02,761 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:23:02,761 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:23:03,193 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:23:03,193 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:04,193 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:05,193 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:05,398 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:07,193 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:09,194 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:10,505 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:11,194 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:13,195 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:14,206 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:23:15,195 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:15,576 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:16,635 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:23:16,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:23:16,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:23:17,196 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:19,196 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:20,750 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:21,197 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:23,197 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:25,198 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:25,844 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:27,199 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:29,199 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:30,930 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:31,200 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:31,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:23:31,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:23:31,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:23:33,200 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:35,201 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:35,932 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:37,201 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:39,202 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:41,011 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:41,202 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:43,202 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:44,206 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:23:45,203 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:46,032 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:46,635 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:23:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:23:46,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:23:47,203 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:49,204 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:51,041 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:51,204 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:53,205 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:55,162 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:23:55,162 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:23:55,162 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:23:55,162 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:23:55,205 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:23:55,206 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:56,098 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:23:56,206 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:57,206 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:23:59,206 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:01,154 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:01,207 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:24:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:24:01,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:24:03,208 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:05,208 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:06,236 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:07,209 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:09,209 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:11,210 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:11,365 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:13,210 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:14,207 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:24:15,211 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:16,414 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:16,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:24:16,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:24:16,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:24:17,211 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:19,212 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:21,212 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:21,534 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:23,212 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:25,213 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:26,659 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:27,214 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:29,214 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:31,215 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:31,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:24:31,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:24:31,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:24:31,781 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:33,215 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:35,216 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:36,916 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:37,216 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:39,217 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:41,217 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:41,951 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:43,218 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:44,207 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:24:45,218 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:24:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:24:46,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:24:47,010 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:47,219 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:47,426 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:24:47,426 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:24:47,426 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:24:47,427 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:24:48,219 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:24:48,219 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:49,219 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:51,220 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:52,088 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:53,220 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:55,221 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:57,221 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:24:57,253 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:24:59,222 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:00,062 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:25:00,062 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:25:00,062 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:25:00,062 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:25:00,222 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:25:01,222 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:25:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:25:01,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:25:02,222 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:02,286 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:03,223 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:05,223 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:07,224 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:07,334 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:09,224 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:11,225 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:12,361 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:13,226 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:14,208 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:25:15,226 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:16,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:25:16,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:25:16,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:25:17,227 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:17,416 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:19,227 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:21,228 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:22,434 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:23,228 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:25,228 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:27,229 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:27,473 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:29,229 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:31,230 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:31,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:25:31,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:25:31,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:25:32,502 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:33,231 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:35,231 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:37,232 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:37,540 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:39,232 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:41,233 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:42,669 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:43,233 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:44,209 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:25:45,234 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:25:46,636 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:25:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:25:47,234 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:47,673 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:49,235 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:51,235 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:52,254 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:25:52,254 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:25:52,254 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:25:52,255 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:25:52,706 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:53,236 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:25:53,236 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:54,236 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:55,236 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:57,236 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:25:57,842 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:25:59,237 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:01,237 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:26:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:26:01,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:26:02,916 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:03,238 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:05,239 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:07,239 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:07,919 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:09,240 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:11,240 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:12,956 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:13,241 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:14,209 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:26:15,241 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:16,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:26:16,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:26:16,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:26:17,242 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:18,029 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:19,242 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:21,243 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:23,166 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:23,243 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:25,244 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:27,244 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:28,238 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:29,245 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:31,246 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:31,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:26:31,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:26:31,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:26:33,246 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:33,274 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:35,247 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:37,247 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:38,448 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:39,248 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:41,248 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:43,139 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:26:43,140 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:26:43,140 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:26:43,140 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:26:43,249 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:26:43,249 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:43,541 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:44,210 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:26:44,249 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:45,250 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:46,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:26:46,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:26:46,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:26:47,250 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:48,607 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:49,250 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:51,251 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:53,251 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:53,683 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:55,252 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:55,900 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:26:55,900 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:26:55,900 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:26:55,901 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:26:56,252 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:26:57,252 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:58,253 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:26:58,701 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:26:59,253 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:01,253 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:01,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:27:01,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:27:01,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:27:03,254 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:03,718 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:05,254 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:07,255 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:08,816 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:09,255 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:11,256 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:13,256 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:13,938 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:14,210 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:27:15,257 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:16,636 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:27:16,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:27:16,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:27:17,257 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:19,052 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:19,257 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:21,258 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:23,258 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:24,066 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:25,259 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:27,260 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:29,067 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:29,260 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:31,261 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:31,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:27:31,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:27:31,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:27:33,261 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:34,085 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:35,261 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:37,262 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:39,198 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:39,262 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:41,263 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:43,264 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:44,211 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:27:44,211 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:45,264 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:46,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:27:46,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:27:46,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:27:47,265 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:48,128 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:27:48,128 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:27:48,128 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:27:48,128 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:27:48,265 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:27:49,265 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:49,319 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:50,265 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:51,266 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:53,266 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:54,422 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:27:55,267 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:57,268 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:59,268 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:27:59,509 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:01,269 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:01,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:28:01,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:28:01,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:28:03,269 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:04,515 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:05,270 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:07,270 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:09,271 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:09,588 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:11,271 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:13,272 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:14,211 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:28:14,594 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:15,272 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:16,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:28:16,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:28:16,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:28:17,273 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:19,273 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:19,663 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:21,274 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:23,274 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:24,771 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:25,275 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:27,275 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:29,276 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:29,855 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:31,276 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:31,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:28:31,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:28:31,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:28:33,277 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:34,885 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:35,277 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:37,277 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:39,278 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:39,628 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:28:39,628 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:28:39,628 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:28:39,629 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:28:39,918 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:40,278 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:28:40,279 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:41,279 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:43,279 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:44,212 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:28:45,034 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:45,280 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:46,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:28:46,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:28:46,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:28:47,280 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:49,281 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:50,110 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:51,281 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:52,254 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:28:52,255 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:28:52,255 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:28:52,255 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:28:52,282 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:28:53,282 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:54,282 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:55,209 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:28:55,283 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:57,283 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:28:59,284 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:00,323 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:01,284 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:01,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:29:01,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:29:01,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:29:03,285 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:05,285 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:05,406 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:07,286 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:09,286 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:10,537 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:11,287 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:13,287 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:14,212 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:29:15,287 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:15,686 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:16,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:29:16,638 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:29:16,638 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:29:17,288 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:19,289 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:20,769 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:21,289 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:23,290 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:25,291 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:25,830 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:27,291 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:29,292 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:30,868 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:31,292 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:31,637 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-10 09:29:31,637 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: stop_status
+2023-10-10 09:29:31,639 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:29:33,293 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:35,294 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:35,986 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:37,295 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:39,295 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:41,052 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:41,296 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:43,296 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:44,213 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:29:45,296 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:45,928 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-10 09:29:45,928 DEBUG   SenderThread:1703212 [sender.py:send():380] send: history
+2023-10-10 09:29:45,929 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: summary_record
+2023-10-10 09:29:45,929 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:29:45,929 DEBUG   SenderThread:1703212 [sender.py:send():380] send: exit
+2023-10-10 09:29:45,929 INFO    SenderThread:1703212 [sender.py:send_exit():585] handling exit code: 0
+2023-10-10 09:29:45,929 INFO    SenderThread:1703212 [sender.py:send_exit():587] handling runtime: 871
+2023-10-10 09:29:45,976 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:29:45,977 INFO    SenderThread:1703212 [sender.py:send_exit():593] send defer
+2023-10-10 09:29:45,977 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:45,977 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 0
+2023-10-10 09:29:45,977 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:45,977 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-10-10 09:29:45,977 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 1
+2023-10-10 09:29:45,977 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:45,977 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 1
+2023-10-10 09:29:45,977 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:45,977 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-10-10 09:29:45,977 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 2
+2023-10-10 09:29:45,977 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:45,977 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 2
+2023-10-10 09:29:45,977 INFO    HandlerThread:1703212 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-10 09:29:45,977 DEBUG   SystemMonitor:1703212 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-10 09:29:45,978 INFO    HandlerThread:1703212 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-10 09:29:45,978 DEBUG   SystemMonitor:1703212 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-10 09:29:45,978 INFO    HandlerThread:1703212 [interfaces.py:finish():202] Joined disk monitor
+2023-10-10 09:29:46,001 INFO    HandlerThread:1703212 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-10 09:29:46,001 INFO    HandlerThread:1703212 [interfaces.py:finish():202] Joined memory monitor
+2023-10-10 09:29:46,001 INFO    HandlerThread:1703212 [interfaces.py:finish():202] Joined network monitor
+2023-10-10 09:29:46,002 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:46,002 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-10-10 09:29:46,002 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 3
+2023-10-10 09:29:46,002 DEBUG   SenderThread:1703212 [sender.py:send():380] send: stats
+2023-10-10 09:29:46,002 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:46,002 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 3
+2023-10-10 09:29:46,002 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:46,002 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-10-10 09:29:46,002 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 4
+2023-10-10 09:29:46,002 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:46,002 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 4
+2023-10-10 09:29:46,002 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:46,002 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-10-10 09:29:46,002 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 5
+2023-10-10 09:29:46,002 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:46,002 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 5
+2023-10-10 09:29:46,003 DEBUG   SenderThread:1703212 [sender.py:send():380] send: summary
+2023-10-10 09:29:46,003 INFO    SenderThread:1703212 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-10 09:29:46,003 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:46,003 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-10-10 09:29:46,003 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 6
+2023-10-10 09:29:46,003 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:46,003 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 6
+2023-10-10 09:29:46,003 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:46,003 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-10-10 09:29:46,003 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 7
+2023-10-10 09:29:46,003 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: status_report
+2023-10-10 09:29:46,003 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:46,003 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 7
+2023-10-10 09:29:46,003 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:46,003 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-10-10 09:29:46,297 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:29:46,930 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: poll_exit
+2023-10-10 09:29:47,297 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:48,190 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 8
+2023-10-10 09:29:48,190 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: poll_exit
+2023-10-10 09:29:48,190 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:48,190 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 8
+2023-10-10 09:29:48,191 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:48,191 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-10-10 09:29:48,191 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 9
+2023-10-10 09:29:48,191 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:48,191 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 9
+2023-10-10 09:29:48,191 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:48,191 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-10-10 09:29:48,191 INFO    SenderThread:1703212 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-10-10 09:29:48,298 INFO    Thread-12 :1703212 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:48,299 INFO    SenderThread:1703212 [dir_watcher.py:finish():388] scan: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files
+2023-10-10 09:29:48,299 INFO    SenderThread:1703212 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/conda-environment.yaml conda-environment.yaml
+2023-10-10 09:29:48,299 INFO    SenderThread:1703212 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/config.yaml config.yaml
+2023-10-10 09:29:48,301 INFO    SenderThread:1703212 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log output.log
+2023-10-10 09:29:48,301 INFO    SenderThread:1703212 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json wandb-summary.json
+2023-10-10 09:29:48,301 INFO    SenderThread:1703212 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/requirements.txt requirements.txt
+2023-10-10 09:29:48,301 INFO    SenderThread:1703212 [dir_watcher.py:finish():402] scan save: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-metadata.json wandb-metadata.json
+2023-10-10 09:29:48,302 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 10
+2023-10-10 09:29:48,302 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:48,302 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 10
+2023-10-10 09:29:48,304 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:48,304 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-10-10 09:29:48,306 INFO    SenderThread:1703212 [file_pusher.py:finish():175] shutting down file pusher
+2023-10-10 09:29:48,651 INFO    wandb-upload_0:1703212 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/conda-environment.yaml
+2023-10-10 09:29:48,718 INFO    wandb-upload_2:1703212 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/output.log
+2023-10-10 09:29:48,726 INFO    wandb-upload_3:1703212 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/wandb-summary.json
+2023-10-10 09:29:48,768 INFO    wandb-upload_4:1703212 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/requirements.txt
+2023-10-10 09:29:49,774 INFO    wandb-upload_1:1703212 [upload_job.py:push():131] Uploaded file /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/files/config.yaml
+2023-10-10 09:29:49,975 INFO    Thread-11 :1703212 [sender.py:transition_state():613] send defer: 11
+2023-10-10 09:29:49,975 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:49,976 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 11
+2023-10-10 09:29:49,976 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:49,976 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-10-10 09:29:49,976 INFO    SenderThread:1703212 [file_pusher.py:join():181] waiting for file pusher
+2023-10-10 09:29:49,976 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 12
+2023-10-10 09:29:49,976 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:49,976 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 12
+2023-10-10 09:29:49,977 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:49,977 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-10-10 09:29:49,977 INFO    SenderThread:1703212 [file_stream.py:finish():595] file stream finish called
+2023-10-10 09:29:50,359 INFO    SenderThread:1703212 [file_stream.py:finish():599] file stream finish is done
+2023-10-10 09:29:50,359 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 13
+2023-10-10 09:29:50,359 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:50,359 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 13
+2023-10-10 09:29:50,360 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:50,360 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-10-10 09:29:50,360 INFO    SenderThread:1703212 [sender.py:transition_state():613] send defer: 14
+2023-10-10 09:29:50,360 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: defer
+2023-10-10 09:29:50,360 INFO    HandlerThread:1703212 [handler.py:handle_request_defer():172] handle defer: 14
+2023-10-10 09:29:50,360 DEBUG   SenderThread:1703212 [sender.py:send():380] send: final
+2023-10-10 09:29:50,360 DEBUG   SenderThread:1703212 [sender.py:send():380] send: footer
+2023-10-10 09:29:50,360 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: defer
+2023-10-10 09:29:50,360 INFO    SenderThread:1703212 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-10-10 09:29:50,361 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: poll_exit
+2023-10-10 09:29:50,361 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: poll_exit
+2023-10-10 09:29:50,361 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: server_info
+2023-10-10 09:29:50,361 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: server_info
+2023-10-10 09:29:50,361 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: get_summary
+2023-10-10 09:29:50,364 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: sampled_history
+2023-10-10 09:29:50,364 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-10 09:29:50,364 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: job_info
+2023-10-10 09:29:50,413 DEBUG   SenderThread:1703212 [sender.py:send_request():407] send_request: job_info
+2023-10-10 09:29:50,414 INFO    MainThread:1703212 [wandb_run.py:_footer_history_summary_info():3599] rendering history
+2023-10-10 09:29:50,414 INFO    MainThread:1703212 [wandb_run.py:_footer_history_summary_info():3631] rendering summary
+2023-10-10 09:29:50,414 INFO    MainThread:1703212 [wandb_run.py:_footer_sync_info():3558] logging synced files
+2023-10-10 09:29:50,414 DEBUG   HandlerThread:1703212 [handler.py:handle_request():146] handle_request: shutdown
+2023-10-10 09:29:50,414 INFO    HandlerThread:1703212 [handler.py:finish():866] shutting down handler
+2023-10-10 09:29:51,365 INFO    WriterThread:1703212 [datastore.py:close():294] close: /home/abhi/research/action_recognition/toy_HAR/wandb/run-20231010_091513-7v8oqw05/run-7v8oqw05.wandb
+2023-10-10 09:29:51,414 INFO    SenderThread:1703212 [sender.py:finish():1534] shutting down sender
+2023-10-10 09:29:51,414 INFO    SenderThread:1703212 [file_pusher.py:finish():175] shutting down file pusher
+2023-10-10 09:29:51,414 INFO    SenderThread:1703212 [file_pusher.py:join():181] waiting for file pusher
