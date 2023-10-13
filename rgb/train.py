@@ -15,10 +15,11 @@ from argparse import ArgumentParser
 # Parse command-line arguments
 parser = ArgumentParser()
 # parser.add_argument('--sweep', action='store_true')
-parser.add_argument('--batch_size', type=int, default=1)
+parser.add_argument('--batch_size', type=int, default=32)
 parser.add_argument('--num_epochs', type=int, default=50)
 parser.add_argument('--optimizer', type=str, default='Adam')
 parser.add_argument('--learning_rate', type=float, default=.001)
+parser.add_argument('--wandb', action='store_true')
 args = parser.parse_args()
 
 # Define hyperparameters (note sweep overrides them)
@@ -35,27 +36,22 @@ print("Using device: ",device)
 # torch.cuda.empty_cache()
 
 
+if args.wandb:
+    # start a new wandb run to track this script
+    wandb.init(
+        # set the wandb project where this run will be logged
+        project="toy-HAR",
+        
+        # track hyperparameters and run metadata
+        config={
+        'num_epochs': args.num_epochs,
+        'batch_size': args.batch_size,
+        'learning_rate': args.learning_rate,
+        'optimizer': args.optimizer
+    }
+    )
+    wandb.run.name = f"FE_{args.optimizer}_{args.learning_rate}_{args.batch_size}_{args.num_epochs}"
 
-# start a new wandb run to track this script
-wandb.init(
-    # set the wandb project where this run will be logged
-    project="toy-HAR",
-    
-    # track hyperparameters and run metadata
-    config={
-    'num_epochs': args.num_epochs,
-    'batch_size': args.batch_size,
-    'learning_rate': args.learning_rate,
-    'optimizer': args.optimizer
-}
-)
-config = wandb.config
-
-# Define hyperparameters
-num_epochs = config.num_epochs
-batch_size = config.batch_size
-learning_rate = config.learning_rate
-optimizer = config.optimizer
 
 
 
@@ -66,12 +62,12 @@ transform = transforms.Compose([
     transforms.Resize((224, 224)),  # Resize frames
     transforms.ToTensor(),           # Convert frames to tensors
 ])
+base_dir = f"/home/akamboj2/data/utd-mhad/RGB_splits/Action_80_20_#1"
+train_dataset = CustomVideoDataset(root_dir=os.path.join(base_dir,"train.txt"), video_length=video_length, transform=transform)
+train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
-train_dataset = CustomVideoDataset(root_dir="/home/abhi/data/utd-mhad/train.txt", video_length=video_length, transform=transform)
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-
-val_dataset = CustomVideoDataset(root_dir="/home/abhi/data/utd-mhad/val.txt", video_length=video_length, transform=transform)
-val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
+val_dataset = CustomVideoDataset(root_dir=os.path.join(base_dir,"val.txt"), video_length=video_length, transform=transform)
+val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
 # Define the 3D CNN model 
 class BasicActionRecognitionModel(nn.Module):
@@ -140,10 +136,8 @@ class ActionRecognitionModel(nn.Module):
         b, t, c, h, w = x.shape
         x = x.view(-1, c, h, w)
         x = self.feature_extractor(x)
-        y = x.clone()
+        post_fe_x = x.clone()
 
-        # print(x.shape)
-        # print(x.view(1,-1).shape)
         #insert time dim after b
         x = x.view(b, t, *x.shape[1:])
 
@@ -152,13 +146,13 @@ class ActionRecognitionModel(nn.Module):
         # Apply 3D convolutional layers
         x = self.conv3d_block(x)
         # print("after conv3d",x.shape)
-        x = x.view(batch_size,-1) # flatten preserve batch_size
+        x = x.view(b,-1) # flatten preserve batch_size
         # print(x.shape)
 
         #residual connection
-        y = y.view(batch_size,-1).chunk(16,dim=1)
-        # print("y shape",len(y),y[0].shape)
-        chunks = torch.stack(y,dim=1)
+        post_fe_x = post_fe_x.view(b,-1).chunk(16,dim=1)
+        # print("post_fe_x shape",len(post_fe_x),post_fe_x[0].shape)
+        chunks = torch.stack(post_fe_x,dim=1)
         # print("chunks shape",chunks.shape)
         summed_chunks = chunks.sum(dim=1)
         # print("summed chunks shape",summed_chunks.shape)
@@ -170,16 +164,18 @@ class ActionRecognitionModel(nn.Module):
         return x
     
 
-model = ActionRecognitionModel(num_classes=27).to(device)  # Replace 27 with the number of action classes
-# print(model)
 
 # Define the model, loss function, and optimizer
 model = ActionRecognitionModel(num_classes=27).to(device)
+if torch.cuda.device_count() > 1:
+    print("Using", torch.cuda.device_count(), "GPUs")
+    model = nn.DataParallel(model,device_ids=list(range(torch.cuda.device_count())))
+
 criterion = nn.CrossEntropyLoss()
-if optimizer == 'Adam':
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-elif optimizer == 'SGD':
-    optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
+if args.optimizer == 'Adam':
+    optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
+elif args.optimizer == 'SGD':
+    optimizer = optim.SGD(model.parameters(), lr=args.learning_rate, momentum=0.9)
 
 
 # Define a variable to keep track of the highest validation accuracy achieved
@@ -187,7 +183,7 @@ best_val_acc = 0.0
 
 if __name__ == '__main__':
     # Training loop
-    for epoch in range(num_epochs):
+    for epoch in range(args.num_epochs):
         model.train()
         running_loss = 0.0
 
@@ -200,9 +196,9 @@ if __name__ == '__main__':
             running_loss += loss.item()
 
         # Print the average loss for this epoch
-        print(f'Epoch [{epoch+1}/{num_epochs}] Loss: {running_loss / len(train_loader)}')
+        print(f'Epoch [{epoch+1}/{args.num_epochs}] Loss: {running_loss / len(train_loader)}')
         # Log the loss to wandb
-        wandb.log({'train_loss': running_loss / len(train_loader)})
+        if args.wandb: wandb.log({'train_loss': running_loss / len(train_loader)})
 
         if (epoch+1)%2 == 0:
             model.eval()
@@ -214,13 +210,19 @@ if __name__ == '__main__':
                 total_acc+=acc
             total_acc/=len(val_loader)
             print(f'Val on [{epoch+1}] Acc: {total_acc}')
-            wandb.log({'val_acc': total_acc})
+            if args.wandb: wandb.log({'val_acc': total_acc})
 
             # Check if this is the best validation accuracy achieved so far
+            best_val_file = None
+            for f in os.listdir('./models/'):
+                if f.startswith('best_checkpoint_FE'):
+                    best_val_acc = float(f.split("_")[3][:-3]) #get the accuracy from the filename, remove .pth in the end
+                    best_val_file = os.path.join("./models",f)
             if total_acc > best_val_acc:
+                if best_val_file: os.remove(best_val_file)
                 best_val_acc = total_acc
                 # Save the model state with the best validation accuracy
-                checkpoint_path = f'rgb/best_checkpoint_FE_{best_val_acc:.2f}.pt'
+                checkpoint_path = f'./models/best_checkpoint_FE_{best_val_acc:.2f}.pt'
                 torch.save(model.state_dict(), checkpoint_path)
 
     print(f'Training finished, best validation accuracy: {best_val_acc:.2f}, saved model checkpoint: {checkpoint_path}')
