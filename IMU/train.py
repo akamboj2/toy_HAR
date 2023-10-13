@@ -7,6 +7,26 @@ from argparse import ArgumentParser
 import wandb
 
 # Define the MLP model
+class joint_IMU_MLP(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(joint_IMU_MLP, self).__init__()
+        self.hidden_size = hidden_size
+        self.pid = IMU_MLP(input_size, hidden_size, output_size=8) #pid has 8 classes
+        model_path = "./models/pid_best_model2048_68.7861.pt"
+        self.pid.load_state_dict(torch.load(model_path))
+        self.pid.layers[3] = nn.Identity() #remove the last linear layer, output should be bs x hidden_size/16
+
+        self.action_features = MLP(input_size, hidden_size, hidden_size//4)
+
+        self.action = IMU_MLP(hidden_size//4+hidden_size//16, hidden_size, output_size)
+        #basically 2/3 contriubtion from inputs and 1/3 from pid (1/4/(1/4+1/16)=2/3)... shouldn't it be swapped? idk can test that
+
+    def forward(self, x):
+        pid_out = self.pid(x)
+        action_features = self.action_features(x)
+        out = self.action(torch.cat((pid_out, action_features), dim=1)) #cat on dim1 to keep batch size
+        return out
+    
 class IMU_MLP(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(IMU_MLP, self).__init__()
@@ -92,17 +112,18 @@ def main():
     parser = ArgumentParser()
     # parser.add_argument('--sweep', action='store_true')
     parser.add_argument('--num_epochs', type=int, default=100)
-    parser.add_argument('--batch_size', type=int, default=1)
+    parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--learning_rate', type=float, default=.001)
     parser.add_argument('--optimizer', type=str, default='Adam')
     parser.add_argument('--test', action='store_true',default=False)
-    parser.add_argument('--hidden_size', type=int, default=1024)
+    parser.add_argument('--hidden_size', type=int, default=2048)
     args = parser.parse_args()
 
     # Set the hyperparameters (note most set in argparser abpve)
     batch_size = 16
-    label_category =  'pid' # or 'action'
+    label_category =  'action' # 'pid' or 'action'
     num_classes = 27 if label_category == 'action' else 8
+    joint = False
 
     #MLP Specficic:
     input_size = 180*6
@@ -123,9 +144,12 @@ def main():
             'optimizer': args.optimizer,
             'hidden_size': args.hidden_size
         })
+        wandb.run.name = f"IMU_Joint{joint}_{label_category}_{args.optimizer}_{args.learning_rate}_{args.batch_size}_{args.num_epochs}"
+
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Using device: ",device)
+    print("Args: ", args)
 
 
     # Load the dataset
@@ -138,7 +162,10 @@ def main():
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
 
     # Define the model, loss function, and optimizer
-    model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
+    if joint:
+        model = joint_IMU_MLP(input_size, hidden_size, output_size).to(device).float()
+    else:
+        model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
     criterion = nn.CrossEntropyLoss()
     if args.optimizer == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
