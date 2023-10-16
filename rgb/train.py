@@ -15,32 +15,28 @@ from argparse import ArgumentParser
 # Parse command-line arguments
 parser = ArgumentParser()
 # parser.add_argument('--sweep', action='store_true')
-parser.add_argument('--batch_size', type=int, default=32)
+parser.add_argument('--batch_size', type=int, default=16)
 parser.add_argument('--num_epochs', type=int, default=50)
 parser.add_argument('--optimizer', type=str, default='Adam')
 parser.add_argument('--learning_rate', type=float, default=.001)
-parser.add_argument('--wandb', action='store_true')
+parser.add_argument('--test', action='store_true')
 args = parser.parse_args()
 
-# Define hyperparameters (note sweep overrides them)
-video_length = 16
-# below are in confiug
-# batch_size = 1
-# num_epochs = 50
-# optimizer = 'Adam'
-# learning_rate=.001
+# Define hyperparameters (most in argparse)
+video_length = 50
 
 # Define the device for training
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device: ",device)
+print("Args:",args)
 # torch.cuda.empty_cache()
 
 
-if args.wandb:
+if not args.test:
     # start a new wandb run to track this script
     wandb.init(
         # set the wandb project where this run will be logged
-        project="toy-HAR",
+        project="toy-HAR-RGB-action",
         
         # track hyperparameters and run metadata
         config={
@@ -198,7 +194,7 @@ if __name__ == '__main__':
         # Print the average loss for this epoch
         print(f'Epoch [{epoch+1}/{args.num_epochs}] Loss: {running_loss / len(train_loader)}')
         # Log the loss to wandb
-        if args.wandb: wandb.log({'train_loss': running_loss / len(train_loader)})
+        if not args.test: wandb.log({'train_loss': running_loss / len(train_loader)})
 
         if (epoch+1)%2 == 0:
             model.eval()
@@ -210,7 +206,7 @@ if __name__ == '__main__':
                 total_acc+=acc
             total_acc/=len(val_loader)
             print(f'Val on [{epoch+1}] Acc: {total_acc}')
-            if args.wandb: wandb.log({'val_acc': total_acc})
+            if not args.test: wandb.log({'val_acc': total_acc})
 
             # Check if this is the best validation accuracy achieved so far
             best_val_file = None
@@ -225,7 +221,8 @@ if __name__ == '__main__':
                 checkpoint_path = f'./models/best_checkpoint_FE_{best_val_acc:.2f}.pt'
                 torch.save(model.state_dict(), checkpoint_path)
 
-    print(f'Training finished, best validation accuracy: {best_val_acc:.2f}, saved model checkpoint: {checkpoint_path}')
+    # print(f'Training finished, best validation accuracy: {best_val_acc:.2f}, saved model checkpoint: {checkpoint_path}')
+    print(f'Training finished, best validation accuracy: {best_val_acc:.2f}')
 
 
 

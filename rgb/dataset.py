@@ -74,13 +74,17 @@ class CustomVideoDataset(Dataset):
 
 if __name__=='__main__':
     dir = "/home/abhi/data/utd-mhad/RGB"
-    dir = "/home/abhi/data/utd-mhad/RGB_splits/train.txt"
+    dir = "/home/akamboj2/data/utd-mhad/RGB_splits/Action_80_20_#1/train.txt"
     
     d = CustomVideoDataset(dir)
     
+    video_lengths = []
     for itm in d:
         print("input:", itm[0].shape, "action label:", itm[1])
+        video_lengths.append(itm[0].shape[0])
         continue
 
     print(len(d))
+    print("average video length:", sum(video_lengths)/len(video_lengths))
+    # average video length: 52.55668604651163 (in training)
     
