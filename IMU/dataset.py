@@ -36,7 +36,7 @@ class IMUDataset(Dataset):
             accel_data = torch.cat([accel_data, torch.zeros(self.vid_length - len(accel_data), *accel_data.shape[1:])])
             
         
-        return accel_data, int(label)
+        return accel_data, int(label), file_path
 
 if __name__=='__main__':
     dir = "/home/abhi/data/utd-mhad/Inertial_splits/train.txt"

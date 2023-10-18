@@ -1,3 +1,5 @@
+# python train.py --batch_size 1 --num_epochs 50 --optimizer Adam --learning_rate .001 --test
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -23,7 +25,7 @@ parser.add_argument('--test', action='store_true')
 args = parser.parse_args()
 
 # Define hyperparameters (most in argparse)
-video_length = 50
+video_length = 16
 
 # Define the device for training
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -58,7 +60,8 @@ transform = transforms.Compose([
     transforms.Resize((224, 224)),  # Resize frames
     transforms.ToTensor(),           # Convert frames to tensors
 ])
-base_dir = f"/home/akamboj2/data/utd-mhad/RGB_splits/Action_80_20_#1"
+# base_dir = f"/home/akamboj2/data/utd-mhad/RGB_splits/Action_80_20_#1"  #cig 1 server
+base_dir = f"/home/abhi/data/utd-mhad/RGB_splits/Action_80_20_#1" #at home computer
 train_dataset = CustomVideoDataset(root_dir=os.path.join(base_dir,"train.txt"), video_length=video_length, transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
@@ -176,50 +179,70 @@ elif args.optimizer == 'SGD':
 
 # Define a variable to keep track of the highest validation accuracy achieved
 best_val_acc = 0.0
+def evaluate(model, val_loader, device):
+    model.eval()
+    total_acc=0.
+    for val_inputs,val_labels in tqdm(val_loader):
+        out = model(val_inputs.to(device))
+        pred = out.cpu().type(torch.int).argmax(dim=-1)
+        acc = sum(torch.eq(val_labels,pred))/float(len(val_labels))
+        total_acc+=acc
+    total_acc/=len(val_loader)
+    return total_acc
+
+
 
 if __name__ == '__main__':
-    # Training loop
-    for epoch in range(args.num_epochs):
-        model.train()
-        running_loss = 0.0
 
-        for inputs, labels in tqdm(train_loader):
-            optimizer.zero_grad()
-            outputs = model(inputs.to(device))
-            loss = criterion(outputs.cpu(), labels)
-            loss.backward()
-            optimizer.step()
-            running_loss += loss.item()
-
-        # Print the average loss for this epoch
-        print(f'Epoch [{epoch+1}/{args.num_epochs}] Loss: {running_loss / len(train_loader)}')
-        # Log the loss to wandb
-        if not args.test: wandb.log({'train_loss': running_loss / len(train_loader)})
-
-        if (epoch+1)%2 == 0:
-            model.eval()
-            total_acc=0.
-            for val_inputs,val_labels in tqdm(val_loader):
-                out = model(val_inputs.to(device))
-                pred = out.cpu().type(torch.int).argmax(dim=-1)
-                acc = sum(torch.eq(val_labels,pred))/float(len(val_labels))
-                total_acc+=acc
-            total_acc/=len(val_loader)
-            print(f'Val on [{epoch+1}] Acc: {total_acc}')
-            if not args.test: wandb.log({'val_acc': total_acc})
-
-            # Check if this is the best validation accuracy achieved so far
-            best_val_file = None
+    if args.test:
+        #NOTE: .71 acc model has 16 as video_length
+        models = os.listdir('./models/')
+        for m in models:
             for f in os.listdir('./models/'):
                 if f.startswith('best_checkpoint_FE'):
-                    best_val_acc = float(f.split("_")[3][:-3]) #get the accuracy from the filename, remove .pth in the end
-                    best_val_file = os.path.join("./models",f)
-            if total_acc > best_val_acc:
-                if best_val_file: os.remove(best_val_file)
-                best_val_acc = total_acc
-                # Save the model state with the best validation accuracy
-                checkpoint_path = f'./models/best_checkpoint_FE_{best_val_acc:.2f}.pt'
-                torch.save(model.state_dict(), checkpoint_path)
+                    model_path = os.path.join("./models",f)
+                    break
+        print("Evaluating model: ", model_path)
+        model.load_state_dict(torch.load(model_path))
+        acc = evaluate(model, val_loader, device)
+        print('Test accuracy: {:.4f} %'.format(acc))
+
+
+    else:
+        # Training loop
+        for epoch in range(args.num_epochs):
+            model.train()
+            running_loss = 0.0
+
+            for inputs, labels in tqdm(train_loader):
+                optimizer.zero_grad()
+                outputs = model(inputs.to(device))
+                loss = criterion(outputs.cpu(), labels)
+                loss.backward()
+                optimizer.step()
+                running_loss += loss.item()
+
+            # Print the average loss for this epoch
+            print(f'Epoch [{epoch+1}/{args.num_epochs}] Loss: {running_loss / len(train_loader)}')
+            # Log the loss to wandb
+            if not args.test: wandb.log({'train_loss': running_loss / len(train_loader)})
+
+            if (epoch+1)%2 == 0:
+                total_acc = evaluate(model, val_loader, device)
+                print(f'Val on [{epoch+1}] Acc: {total_acc}')
+                if not args.test: wandb.log({'val_acc': total_acc})
+                # Check if this is the best validation accuracy achieved so far
+                best_val_file = None
+                for f in os.listdir('./models/'):
+                    if f.startswith('best_checkpoint_FE'):
+                        best_val_acc = float(f.split("_")[3][:-3]) #get the accuracy from the filename, remove .pth in the end
+                        best_val_file = os.path.join("./models",f)
+                if total_acc > best_val_acc:
+                    if best_val_file: os.remove(best_val_file)
+                    best_val_acc = total_acc
+                    # Save the model state with the best validation accuracy
+                    checkpoint_path = f'./models/best_checkpoint_FE_{best_val_acc:.2f}.pt'
+                    torch.save(model.state_dict(), checkpoint_path)
 
     # print(f'Training finished, best validation accuracy: {best_val_acc:.2f}, saved model checkpoint: {checkpoint_path}')
     print(f'Training finished, best validation accuracy: {best_val_acc:.2f}')
