@@ -38,6 +38,37 @@ actions_dict = {
     27: 'Squat'
 }
 
+#Define 1D CNN model
+class IMU_CNN(nn.Module):
+    def __init__(self, input_channels, hidden_size, output_size):
+        super(IMU_CNN, self).__init__()
+        self.hidden_size = hidden_size
+        self.layers = nn.Sequential(
+            nn.Conv1d(input_channels, hidden_size, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm1d(hidden_size),
+            nn.ReLU(),
+            nn.MaxPool1d(kernel_size=3, stride=3),
+            nn.Conv1d(hidden_size, hidden_size//2, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm1d(hidden_size//2),
+            nn.ReLU(),
+            nn.MaxPool1d(kernel_size=2, stride=2),
+            nn.Conv1d(hidden_size//2, hidden_size//4, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm1d(hidden_size//4),
+            nn.ReLU(),
+            nn.MaxPool1d(kernel_size=2, stride=2),
+        )
+        # assuming starting dim is 6x180 output should be hidden_size/4 x 15
+
+        self.fc = nn.Sequential(
+            nn.Linear(hidden_size//4*15, output_size, dtype=torch.float32),
+        )
+
+    def forward(self, x):
+        x = x.permute(0,2,1)
+        out = self.layers(x)
+        out = out.view(out.shape[0], -1)
+        out = self.fc(out)
+        return out
 
 # Define the MLP model
 class joint_IMU_MLP(nn.Module):
@@ -121,14 +152,14 @@ def train(model, train_loader, val_loader, criterion, optimizer, num_epochs, dev
             best_val_acc=0
             best_val_file= None
             for f in os.listdir('./models/'):
-                prefix = label_category+'Joint_best_model' if joint else label_category+'_best_model'
+                prefix = label_category+'Joint_best_model' if joint else label_category+'_best_modelCNN'
                 if f.startswith(prefix):
                     best_val_acc = float(f.split("_")[3][:-3]) #get the accuracy from the filename, remove .pth in the end
                     best_val_file = os.path.join("./models",f)
             if acc > best_val_acc:
                 if best_val_file: os.remove(best_val_file)
                 best_val_acc = acc
-                fname = f'./models/{label_category}Joint_best_model{model.hidden_size}_{acc:.4f}.pt' if joint else f'./models/{label_category}_best_model{model.hidden_size}_{acc:.4f}.pt'
+                fname = f'./models/{label_category}Joint_best_model{model.hidden_size}_{acc:.4f}.pt' if joint else f'./models/{label_category}_best_modelCNN{model.hidden_size}_{acc:.4f}.pt'
                 torch.save(model.state_dict(), fname)
 
 # Define evaluation loop
@@ -137,7 +168,7 @@ def evaluate(model, val_loader,device):
     with torch.no_grad():
         correct = 0
         total = 0
-        for inputs, labels, path in val_loader:
+        for inputs, labels in val_loader:
             outputs = model(inputs.to(device).type(torch.float32))
             _, predicted = torch.max(outputs.cpu().data, 1)
             total += labels.size(0)
@@ -175,7 +206,7 @@ def main():
     # Set the hyperparameters (note most set in argparser abpve)
     label_category =  'action' # 'pid' or 'action'
     num_classes = 27 if label_category == 'action' else 8
-    joint = True
+    joint = False
 
     #MLP Specficic:
     input_size = 180*6
@@ -196,7 +227,7 @@ def main():
             'optimizer': args.optimizer,
             'hidden_size': args.hidden_size
         })
-        wandb.run.name = f"IMU_Joint{joint}_{label_category}_{args.optimizer}_{args.learning_rate}_{args.batch_size}_{args.num_epochs}"
+        wandb.run.name = f"IMU_CNN_Joint{joint}_{label_category}_{args.optimizer}_{args.learning_rate}_{args.batch_size}_{args.num_epochs}"
 
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -217,7 +248,8 @@ def main():
     if joint:
         model = joint_IMU_MLP(input_size, hidden_size, output_size).to(device).float()
     else:
-        model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
+        # model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
+        model = IMU_CNN(6, hidden_size, output_size).to(device).float()
     criterion = nn.CrossEntropyLoss()
     if args.optimizer == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
@@ -230,7 +262,7 @@ def main():
     if args.test:
         models = os.listdir('./models/')
         for m in models:
-            prefix = label_category+'Joint_best_model' if joint else label_category+'_best_model'
+            prefix = label_category+'Joint_best_modelCNN' if joint else label_category+'_best_model'
             if m.startswith(prefix):
                 model_path = os.path.join('./models/', m)
                 break

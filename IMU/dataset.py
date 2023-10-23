@@ -36,16 +36,16 @@ class IMUDataset(Dataset):
             accel_data = torch.cat([accel_data, torch.zeros(self.vid_length - len(accel_data), *accel_data.shape[1:])])
             
         
-        return accel_data, int(label), file_path
+        return accel_data, int(label) # returns accel data 180x6
 
 if __name__=='__main__':
-    dir = "/home/abhi/data/utd-mhad/Inertial_splits/train.txt"
+    dir = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1/train.txt"
     d = IMUDataset(dir)
 
     sizes = []
     for itm in d:
-        print("input:", itm[0].shape, "action label:", itm[1])
-        print(itm[0])
+        print("input:", itm[0].shape, "action label:", itm[1]) 
+        # print(itm[0])
         sizes.append(itm[0].shape[0])
 
     print("Average size:", np.mean(sizes)) #180 frames
