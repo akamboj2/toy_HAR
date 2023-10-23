@@ -99,11 +99,17 @@ class IMU_MLP(nn.Module):
         super(IMU_MLP, self).__init__()
         self.hidden_size = hidden_size
         self.layers = nn.Sequential(
-            MLP(input_size, hidden_size, int(hidden_size/4)),
+            MLP(input_size, hidden_size, 256),
             nn.Dropout(0.5),
-            MLP(int(hidden_size/4), int(hidden_size/4), int(hidden_size/16)),
-            nn.Linear(int(hidden_size/16), output_size, dtype=torch.float32)
+            MLP(256, 128, 64),
+            nn.Linear(64, output_size, dtype=torch.float32)
         )
+        # self.layers = nn.Sequential(
+        #     MLP(input_size, hidden_size, int(hidden_size/4)),
+        #     nn.Dropout(0.5),
+        #     MLP(int(hidden_size/4), int(hidden_size/4), int(hidden_size/16)),
+        #     nn.Linear(int(hidden_size/16), output_size, dtype=torch.float32)
+        # )
 
     def forward(self, x):
         x = x.view(x.shape[0], -1)
@@ -241,15 +247,15 @@ def main():
     val_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"val.txt")
     train_dataset = IMUDataset(train_dir)
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-    val_dataset = IMUDataset(val_dir)
+    val_dataset = IMUDataset(val_dir, time_invariance_test=False)
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True)
 
     # Define the model, loss function, and optimizer
     if joint:
         model = joint_IMU_MLP(input_size, hidden_size, output_size).to(device).float()
     else:
-        # model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
-        model = IMU_CNN(6, hidden_size, output_size).to(device).float()
+        model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
+        # model = IMU_CNN(6, hidden_size, output_size).to(device).float()
     criterion = nn.CrossEntropyLoss()
     if args.optimizer == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
@@ -260,13 +266,23 @@ def main():
 
     # Test or train the model
     if args.test:
+        print("Testing model: ", model) 
+ 
         models = os.listdir('./models/')
         for m in models:
             prefix = label_category+'Joint_best_modelCNN' if joint else label_category+'_best_model'
             if m.startswith(prefix):
                 model_path = os.path.join('./models/', m)
                 break
+
+        model_path = "/home/abhi/research/action_recognition/toy_HAR/IMU/models/best_saves/action_best_model1024_91.3295.pt"
         print("Evaluating model: ", model_path)
+
+        # # Load the state dictionary from the file
+        # state_dict = torch.load(model_path)
+        # # Print the keys in the state dictionary
+        # print(state_dict.keys())   
+
         model.load_state_dict(torch.load(model_path))
         acc = evaluate(model, val_loader, device)
         print('Test accuracy: {:.4f} %'.format(acc))

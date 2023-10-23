@@ -4,9 +4,10 @@ import scipy.io
 import numpy as np
 
 class IMUDataset(Dataset):
-    def __init__(self, split_file):
+    def __init__(self, split_file, time_invariance_test=False):
         self.videos = []
         self.vid_length = 180
+        self.time_invariance_test = time_invariance_test
         # Read the lines from split file
         f = open(split_file,'r')
         for line in f.readlines():
@@ -29,8 +30,14 @@ class IMUDataset(Dataset):
         accel_data = torch.tensor(data['d_iner'])
         
         t,xyz = accel_data.shape
+        start = 0
+        # if self.time_invariance_test:
+        #     self.vid_length = np.random.randint(90,180)
         if t>self.vid_length:
-            accel_data = accel_data[:self.vid_length,:]
+            if self.time_invariance_test:
+                start = np.random.randint(0, t-self.vid_length)
+                print("Changing start to ", start)
+            accel_data = accel_data[start:start+self.vid_length,:]
         elif t<self.vid_length:
             # Pad accel_data with zeros to make them the same length
             accel_data = torch.cat([accel_data, torch.zeros(self.vid_length - len(accel_data), *accel_data.shape[1:])])
@@ -40,7 +47,7 @@ class IMUDataset(Dataset):
 
 if __name__=='__main__':
     dir = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1/train.txt"
-    d = IMUDataset(dir)
+    d = IMUDataset(dir,time_invariance_test=True)
 
     sizes = []
     for itm in d:
