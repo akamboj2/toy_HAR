@@ -38,13 +38,17 @@ class IMU_DeCNN(nn.Module):
 
 class Decoder_DeConv(nn.Module):
     def __init__(self, latent_dims):
-        super(Decoder, self).__init__()
-        self.linear1 = nn.Linear(latent_dims, 512)
-        self.linear2 = nn.Linear(512, 180*6)
+        super(Decoder_DeConv, self).__init__()
+        self.linear1 = nn.Linear(latent_dims, 256)
+        self.linear2 = nn.Linear(256, 512)
+        self.DeCNN = IMU_DeCNN(input_size=512, hidden_size=512, output_channels=6)
 
     def forward(self, z):
         z = F.relu(self.linear1(z))
         z = torch.sigmoid(self.linear2(z))
+        # print("Before DeCNN:", z.shape)
+        z = self.DeCNN(z)
+        # print("After DeCNN:", z.shape)
         return z
     
 class Decoder(nn.Module):
@@ -107,7 +111,7 @@ class VariationalAutoencoder(nn.Module):
     def __init__(self, latent_dims):
         super(VariationalAutoencoder, self).__init__()
         self.encoder = VariationalEncoder(latent_dims)
-        self.decoder = Decoder(latent_dims)
+        self.decoder = Decoder_DeConv(latent_dims)
 
     def forward(self, x):
         z = self.encoder(x)
@@ -120,9 +124,9 @@ if __name__=='__main__':
     """ NOTE: This main function was just for debugging let's import and train this in train.py"""
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    epochs=100
-    latent_dims=256
-    batch_size = 32 #lower bs seems to decrease mse loss and increase kl loss
+    epochs=1000
+    latent_dims=512
+    batch_size = 64 #lower bs seems to decrease mse loss and increase kl loss
     beta = 1/2000 #weight of kl divergence
     """
     total 370, 93, 277: 100,50, 32
@@ -144,7 +148,7 @@ if __name__=='__main__':
             x = F.normalize(x, dim=1) # prevents output x_hat from going to infinity
             opt.zero_grad()
             x_hat = vae(x)
-            loss_mse = ((torch.flatten(x, start_dim=1).float() - x_hat)**2).sum()
+            loss_mse = ((torch.flatten(x, start_dim=1).float() - torch.flatten(x_hat, start_dim=1))**2).sum()
             loss_kl =  vae.encoder.kl
             loss = loss_mse + beta*loss_kl
             loss.backward()
@@ -175,7 +179,7 @@ if __name__=='__main__':
             x = x.to(device) # GPU
             x = F.normalize(x, dim=1) # prevents output x_hat from going to infinity
             x_hat = vae(x)
-            error = ((torch.abs(torch.flatten(x, start_dim=1).float() - x_hat))).sum()
+            error = ((torch.abs(torch.flatten(x, start_dim=1).float() - torch.flatten(x_hat, start_dim=1)))).sum()
             print("Absolute Error:", error.item())
             
     # Now training har model:
