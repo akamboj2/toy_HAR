@@ -33,14 +33,17 @@ class IMUDataset(Dataset):
         start = 0
         # if self.time_invariance_test:
         #     self.vid_length = np.random.randint(90,180)
-        if t>self.vid_length:
-            if self.time_invariance_test:
-                start = np.random.randint(0, t-self.vid_length)
-                print("Changing start to ", start)
+        if self.time_invariance_test:
+            # start = np.random.randint(0, t-self.vid_length)
+            start = np.random.randint(0,self.vid_length//2)
+            # print("Changing start to ", start)
             accel_data = accel_data[start:start+self.vid_length,:]
+            t,xyz = accel_data.shape
+        if t>=self.vid_length:
+            accel_data = accel_data[:self.vid_length,:]
         elif t<self.vid_length:
             # Pad accel_data with zeros to make them the same length
-            accel_data = torch.cat([accel_data, torch.zeros(self.vid_length - len(accel_data), *accel_data.shape[1:])])
+            accel_data = torch.cat([accel_data, torch.zeros(self.vid_length - t, *accel_data.shape[1:])])
             
         
         return accel_data, int(label) # returns accel data 180x6

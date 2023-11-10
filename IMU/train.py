@@ -7,6 +7,7 @@ from argparse import ArgumentParser
 import wandb
 from tabulate import tabulate
 
+from IMU_ViT import ViT
 
 actions_dict = {
     1: 'Swipe left',
@@ -64,7 +65,7 @@ class IMU_CNN(nn.Module):
         )
 
     def forward(self, x):
-        x = x.permute(0,2,1)
+        x = x.permute(0,2,1) # permute to bs x channels x timesteps
         out = self.layers(x)
         out = out.view(out.shape[0], -1)
         out = self.fc(out)
@@ -98,18 +99,20 @@ class IMU_MLP(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(IMU_MLP, self).__init__()
         self.hidden_size = hidden_size
-        self.layers = nn.Sequential(
-            MLP(input_size, hidden_size, 256),
-            nn.Dropout(0.5),
-            MLP(256, 128, 64),
-            nn.Linear(64, output_size, dtype=torch.float32)
-        )
+        # NOTE THIS CORRESPONDS TO THE BEST MODEL
+        # model_path = "/home/abhi/research/action_recognition/toy_HAR/IMU/models/best_saves/action_best_model1024_91.3295.pt"
         # self.layers = nn.Sequential(
-        #     MLP(input_size, hidden_size, int(hidden_size/4)),
+        #     MLP(input_size, hidden_size, 256),
         #     nn.Dropout(0.5),
-        #     MLP(int(hidden_size/4), int(hidden_size/4), int(hidden_size/16)),
-        #     nn.Linear(int(hidden_size/16), output_size, dtype=torch.float32)
+        #     MLP(256, 128, 64),
+        #     nn.Linear(64, output_size, dtype=torch.float32)
         # )
+        self.layers = nn.Sequential(
+            MLP(input_size, hidden_size, int(hidden_size/4)),
+            nn.Dropout(0.5),
+            MLP(int(hidden_size/4), int(hidden_size/4), int(hidden_size/16)),
+            nn.Linear(int(hidden_size/16), output_size, dtype=torch.float32)
+        )
 
     def forward(self, x):
         x = x.view(x.shape[0], -1)
@@ -158,14 +161,14 @@ def train(model, train_loader, val_loader, criterion, optimizer, num_epochs, dev
             best_val_acc=0
             best_val_file= None
             for f in os.listdir('./models/'):
-                prefix = label_category+'Joint_best_model' if joint else label_category+'_best_modelCNN'
+                prefix = label_category+f'Joint_best_model{MODEL_TYPE}' if joint else label_category+f'_best_model{MODEL_TYPE}'
                 if f.startswith(prefix):
                     best_val_acc = float(f.split("_")[3][:-3]) #get the accuracy from the filename, remove .pth in the end
                     best_val_file = os.path.join("./models",f)
             if acc > best_val_acc:
                 if best_val_file: os.remove(best_val_file)
                 best_val_acc = acc
-                fname = f'./models/{label_category}Joint_best_model{model.hidden_size}_{acc:.4f}.pt' if joint else f'./models/{label_category}_best_modelCNN{model.hidden_size}_{acc:.4f}.pt'
+                fname = f'./models/{label_category}Joint_best_model{model.hidden_size}_{acc:.4f}.pt' if joint else f'./models/{label_category}_best_model{MODEL_TYPE}{model.hidden_size}_{acc:.4f}.pt'
                 torch.save(model.state_dict(), fname)
 
 # Define evaluation loop
@@ -182,13 +185,13 @@ def evaluate(model, val_loader,device):
 
             """ NOTE: For this chunk need to update dataset.py to return labels as well as path"""
             # Print incorrect predictions
-            headers = ["Predicted, Actual, Path"]
-            data = []
-            if (predicted == labels).sum() != val_loader.batch_size:
-                incorrect_indices = (predicted != labels).nonzero()[:,0]
-                for i in incorrect_indices:
-                    print("Predicted:", actions_dict[predicted[i].item()+1], ", Actual:", actions_dict[labels[i].item()+1])#, ", Path:", path[i])
-                    # data.append([actions_dict[predicted[i].item()+1], actions_dict[labels[i].item()+1], path[i]])
+            # headers = ["Predicted, Actual, Path"]
+            # data = []
+            # if (predicted == labels).sum() != val_loader.batch_size:
+            #     incorrect_indices = (predicted != labels).nonzero()[:,0]
+            #     for i in incorrect_indices:
+            #         print("Predicted:", actions_dict[predicted[i].item()+1], ", Actual:", actions_dict[labels[i].item()+1])#, ", Path:", path[i])
+            #         # data.append([actions_dict[predicted[i].item()+1], actions_dict[labels[i].item()+1], path[i]])
             # #output to txt file
             # with open("incorrect_predictions.txt", "w") as f:
             #     f.write(tabulate(data, headers=headers))
@@ -196,8 +199,11 @@ def evaluate(model, val_loader,device):
 
         return 100 * correct / total
 
+#GLOBAL VARIABLE to help with checkpoints saving and loading
+MODEL_TYPE = "ViT" #   "CNN" or "ViT" or "" (for MLP)
 # Define the main function
 def main():
+    global MODEL_TYPE
     # Parse command-line arguments
     parser = ArgumentParser()
     # parser.add_argument('--sweep', action='store_true')
@@ -206,7 +212,10 @@ def main():
     parser.add_argument('--learning_rate', type=float, default=.001)
     parser.add_argument('--optimizer', type=str, default='Adam')
     parser.add_argument('--test', action='store_true',default=False)
-    parser.add_argument('--hidden_size', type=int, default=2048)
+    parser.add_argument('--hidden_size', type=int, default=128)
+    parser.add_argument('--model_type', type=str, default='ViT')
+    parser.add_argument('--num_layers', type=int, default=7) 
+    parser.add_argument('--num_heads', type=int, default=12) #note, needs to evenly divide 768 (default embedding/hidden size for ViT): 2,3,4,6,8,12,16,24
     args = parser.parse_args()
 
     # Set the hyperparameters (note most set in argparser abpve)
@@ -233,7 +242,7 @@ def main():
             'optimizer': args.optimizer,
             'hidden_size': args.hidden_size
         })
-        wandb.run.name = f"IMU_CNN_Joint{joint}_{label_category}_{args.optimizer}_{args.learning_rate}_{args.batch_size}_{args.num_epochs}"
+        wandb.run.name = f"IMU_{MODEL_TYPE}_Joint{joint}_{label_category}_{args.optimizer}_{args.learning_rate}_{args.batch_size}_{args.num_epochs}"
 
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -254,8 +263,14 @@ def main():
     if joint:
         model = joint_IMU_MLP(input_size, hidden_size, output_size).to(device).float()
     else:
-        model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
-        # model = IMU_CNN(6, hidden_size, output_size).to(device).float()
+        if MODEL_TYPE=="CNN":
+            model = IMU_CNN(6, hidden_size, output_size).to(device).float()
+        elif MODEL_TYPE=="ViT":
+            # NOTE: "embed_dim (Hidden_size) must be divisible by num_heads"
+            model = ViT(num_classes=output_size, hidden_size = 768, num_layers=args.num_layers, num_heads=args.num_heads).to(device).float()
+        else:
+            model = IMU_MLP(input_size, hidden_size, output_size).to(device).float()
+        
     criterion = nn.CrossEntropyLoss()
     if args.optimizer == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
@@ -270,12 +285,12 @@ def main():
  
         models = os.listdir('./models/')
         for m in models:
-            prefix = label_category+'Joint_best_modelCNN' if joint else label_category+'_best_model'
+            prefix = label_category+f'Joint_best_model{MODEL_TYPE}' if joint else label_category+f'_best_model{MODEL_TYPE}'
             if m.startswith(prefix):
                 model_path = os.path.join('./models/', m)
                 break
 
-        model_path = "/home/abhi/research/action_recognition/toy_HAR/IMU/models/best_saves/action_best_model1024_91.3295.pt"
+        # model_path = "/home/abhi/research/action_recognition/toy_HAR/IMU/models/best_saves/action_best_model1024_91.3295.pt"
         print("Evaluating model: ", model_path)
 
         # # Load the state dictionary from the file
