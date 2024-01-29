@@ -8,6 +8,8 @@ import wandb
 from tabulate import tabulate
 
 from IMU_ViT import ViT
+#    2 Args:  Namespace(num_epochs=267, batch_size=32, learning_rate=0.04962918927073625, optimizer='SGD', test=False, hidden_size=128, model_type='ViT', num_layers=18, num_heads=8)
+# python train.py --batch_size=32 --num_epochs=267 --learning_rate=0.04962918927073625 --optimizer='SGD' --hidden_size=128 --model_type='ViT' --num_layers=18 --num_heads=8
 
 actions_dict = {
     1: 'Swipe left',
@@ -210,7 +212,7 @@ def main():
     parser.add_argument('--num_epochs', type=int, default=100)
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--learning_rate', type=float, default=.001)
-    parser.add_argument('--optimizer', type=str, default='Adam')
+    parser.add_argument('--optimizer', type=str, default='SGD')
     parser.add_argument('--test', action='store_true',default=False)
     parser.add_argument('--hidden_size', type=int, default=128)
     parser.add_argument('--model_type', type=str, default='ViT')
@@ -251,12 +253,13 @@ def main():
 
 
     # Load the dataset
-    datapath = "Inertial_splits/action_80_20_#1" if label_category == 'action' else "Inertial_splits/pid_80_20_#1"
-    train_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"train.txt")
-    val_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"val.txt")
-    train_dataset = IMUDataset(train_dir)
+    # datapath = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1" if label_category == 'action' else "/home/abhi/data/utd-mhad/Inertial_splits/pid_80_20_#1"
+    datapath = "/home/abhi/data/USC-HAD/splits"
+    train_dir = os.path.join(datapath,"train.txt")
+    val_dir = os.path.join(datapath,"val.txt")
+    train_dataset = IMUDataset(train_dir, dataset_name="USC")
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-    val_dataset = IMUDataset(val_dir, time_invariance_test=False)
+    val_dataset = IMUDataset(val_dir, time_invariance_test=False, dataset_name="USC")
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True)
 
     # Define the model, loss function, and optimizer
@@ -273,7 +276,7 @@ def main():
         
     criterion = nn.CrossEntropyLoss()
     if args.optimizer == 'Adam':
-        optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
+        optimizer = optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=1e-5)
     elif args.optimizer == 'SGD':
         optimizer = optim.SGD(model.parameters(), lr=args.learning_rate, momentum=0.9)
 

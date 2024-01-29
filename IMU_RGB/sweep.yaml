@@ -1,0 +1,15 @@
+program: train.py
+method: bayes
+metric:
+  goal: maximize
+  name: val_acc
+parameters:
+  num_epochs:
+    max: 400
+    min: 20
+    distribution: int_uniform
+  learning_rate:
+    max: 0.1
+    min: 0.00001
+    distribution: uniform
+

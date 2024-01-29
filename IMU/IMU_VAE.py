@@ -89,8 +89,8 @@ class VariationalEncoder(nn.Module):
         self.fe = IMU_CNN(input_channels=6, hidden_size=256, output_size=786)
         self.linear1 = nn.Linear(786, 512)
         # self.linear1 = nn.Linear(180*6, 512)
-        self.linear2 = nn.Linear(512, latent_dims)
-        self.linear3 = nn.Linear(512, latent_dims)
+        self.linear2 = nn.Linear(512, latent_dims) # for means
+        self.linear3 = nn.Linear(512, latent_dims) # for stds
 
         self.N = torch.distributions.Normal(0, 1)
         self.N.loc = self.N.loc.cuda() # hack to get sampling on the GPU
@@ -124,9 +124,9 @@ if __name__=='__main__':
     """ NOTE: This main function was just for debugging let's import and train this in train.py"""
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    epochs=1000
-    latent_dims=512
-    batch_size = 64 #lower bs seems to decrease mse loss and increase kl loss
+    epochs=500 #1000
+    latent_dims= 4 #512
+    batch_size = 32 #lower bs seems to decrease mse loss and increase kl loss
     beta = 1/2000 #weight of kl divergence
     """
     total 370, 93, 277: 100,50, 32
@@ -136,7 +136,8 @@ if __name__=='__main__':
     """
      # Load dataset
     dir = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1/train.txt"
-    train_dataset = IMUDataset(dir)
+    # dir = "/home/abhi/data/USC-HAD/splits/train.txt"
+    train_dataset = IMUDataset(dir, dataset_name="UTD")
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
     vae = VariationalAutoencoder(latent_dims).to(device).float() # GPU
@@ -155,18 +156,19 @@ if __name__=='__main__':
             opt.step()
             
             # exit()
-        print("MSE Loss:", loss_mse.item(), "KL Loss:", loss_kl.item())
-        # print("MSE Loss:", loss_mse.item())
-        print(f"Epoch {epoch+1}/{epochs}")
+        if epoch % 10 == 0:
+            print("MSE Loss:", loss_mse.item(), "KL Loss:", loss_kl.item())
+            # print("MSE Loss:", loss_mse.item())
+            print(f"Epoch {epoch+1}/{epochs}")
 
     # Freeze VAE Model:
     for param in vae.parameters():
         param.requires_grad = False
 
     #Test VAE model on unseen data
-    datapath = "Inertial_splits/action_80_20_#1"
-    val_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"val.txt")
-    val_dataset = IMUDataset(val_dir, time_invariance_test=False)
+    val_dir = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1/val.txt"
+    # val_dir = "/home/abhi/data/USC-HAD/splits/val.txt"
+    val_dataset = IMUDataset(val_dir, time_invariance_test=False, dataset_name="UTD")
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
 
     print("Testing VAE model")
@@ -226,3 +228,7 @@ if __name__=='__main__':
             correct += (predicted == labels).sum()
 
     print("Accuracy: ", 100*correct.item()/total, "%")
+
+    # Save model
+    torch.save(model.state_dict(), 'model.pt')
+    torch.save(vae.state_dict(), f'vae_{latent_dims}.pt')
