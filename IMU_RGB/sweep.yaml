@@ -1,15 +1,22 @@
 program: train.py
+name: middleFusion_avg
 method: bayes
 metric:
   goal: maximize
   name: val_acc
 parameters:
+  device: 
+    values: ["cuda:1"]
   num_epochs:
     max: 400
     min: 20
     distribution: int_uniform
   learning_rate:
     max: 0.1
-    min: 0.00001
+    min: 0.000001
     distribution: uniform
+  optimizer:
+    values: ["Adam", "SGD"]
+  hidden_size:
+    values: [64, 128, 256, 512, 1024, 2048]
 
