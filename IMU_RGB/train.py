@@ -84,7 +84,7 @@ class Middle_Fusion(nn.Module):
     def forward(self, x):
         z_rgb = self.rgb_model(x[0])
         z_imu = self.imu_model(x[1])
-        z_sum = z_rgb+z_imu
+        z_sum = (z_rgb+z_imu)/2
         out = self.joint_processing(z_sum)
         return out
 
@@ -620,13 +620,14 @@ def main():
     parser = ArgumentParser()
     # parser.add_argument('--sweep', action='store_true')
     parser.add_argument('--num_epochs', type=int, default=100)
-    parser.add_argument('--batch_size', type=int, default=8)
+    parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--learning_rate', type=float, default=.001)
     parser.add_argument('--optimizer', type=str, default='Adam')
     parser.add_argument('--test', action='store_true',default=False)
     parser.add_argument('--no_wandb', action='store_true',default=False)
     parser.add_argument('--hidden_size', type=int, default=2048)
     parser.add_argument('--experiment', type=int, default=1)
+    parser.add_argument('--device', type=str, default='cuda:0')
     global args
     args = parser.parse_args()
 
@@ -670,7 +671,8 @@ def main():
         print("Creating a wandb run:",wandb_name)
 
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = args.device
     print("Using device: ",device)
     print("Args: ", args)
 
@@ -681,15 +683,16 @@ def main():
         datapath = "Both_splits/both_45_45_10_#1"
     else:
         datapath = "Both_splits/both_80_20_#1"
-    train_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"train.txt")
-    val_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"val.txt")
-    train_dataset = RGB_IMU_Dataset(train_dir, video_length=rgb_video_length, transform=transforms)
+    base_path = "/home/akamboj2/data/utd-mhad/"
+    train_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train.txt")
+    val_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"val.txt")
+    train_dataset = RGB_IMU_Dataset(train_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
-    val_dataset = RGB_IMU_Dataset(val_dir, video_length=rgb_video_length, transform=transforms)
+    val_dataset = RGB_IMU_Dataset(val_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
     if model_info['fusion_type'] == 'cross_modal':
-        train_2_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"train_2.txt")
-        train_2_dataset = RGB_IMU_Dataset(train_2_dir, video_length=rgb_video_length, transform=transforms)
+        train_2_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train_2.txt")
+        train_2_dataset = RGB_IMU_Dataset(train_2_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
         train_2_loader = torch.utils.data.DataLoader(train_2_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
     # Define the model, loss function, and optimizer
