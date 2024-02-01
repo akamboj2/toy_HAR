@@ -637,13 +637,8 @@ def main():
     model_info = {
         'sensors' : ['RGB', 'IMU'], #['RGB', 'IMU'] #NOTE: Keep the order here consistent for naming purposes
         'tasks' : ['HAR'], #['HAR', 'PID'],
-<<<<<<< HEAD
         'fusion_type' : 'cross_modal', #'cross_modal', # 'early', 'middle', 'late', 'cross_modal'
         'num_classes' : -1,
-=======
-        'fusion_type' : 'cross_modal', # 'early', 'middle', 'late', 'cross_modal'
-        'num_classes' : -1, #will throw an error if we don't set it later!
->>>>>>> 7ed717335ec120c1386c9ecbf116699359b9b52d
         'project_name' : ""
     }
     rgb_video_length = 30
