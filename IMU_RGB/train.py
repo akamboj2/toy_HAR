@@ -477,7 +477,7 @@ def main():
     model_info = {
         'sensors' : ['RGB', 'IMU'], #['RGB', 'IMU'] #NOTE: Keep the order here consistent for naming purposes
         'tasks' : ['HAR'], #['HAR', 'PID'],
-        'fusion_type' : 'middle', #'cross_modal', # 'early', 'middle', 'late', 'cross_modal'
+        'fusion_type' : 'cross_modal', #'cross_modal', # 'early', 'middle', 'late', 'cross_modal'
         'num_classes' : -1,
         'project_name' : ""
     }
