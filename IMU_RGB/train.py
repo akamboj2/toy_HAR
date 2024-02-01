@@ -360,20 +360,23 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
 
         # --------------------------------------------------
         # Now do the RGB model training
+        camera_only = model_info.copy()
+        camera_only['sensors'] = ['RGB']
         running_loss = 0.0
         for i, data_batch in enumerate(train_2_loader):
             
-            inputs, labels = decouple_inputs(data_batch, model_info, device)
+            inputs, labels = decouple_inputs(data_batch, model_info=camera_only, device=device)
 
             optimizer.zero_grad()
-            if model_info['fusion_type'] == 'cross_modal':
-                outputs = model(inputs, model_info['sensors'])
-            else:
-                outputs = model(inputs)
-            if len(model_info['tasks']) == 2:
-                loss = criterion(outputs[0], labels[0].to(device)) + criterion(outputs[1], labels[1].to(device))
-            else:
-                loss = criterion(outputs, labels.to(device))
+
+            assert model_info['fusion_type'] == 'cross_modal' #otherwise next line will be an error
+            outputs = model(inputs, sensors=['RGB']) 
+
+            #assume one task for now
+            # if len(model_info['tasks']) == 2:
+            #     loss = criterion(outputs[0], labels[0].to(device)) + criterion(outputs[1], labels[1].to(device))
+            # else:
+            loss = criterion(outputs, labels.to(device))
             loss.backward()
             optimizer.step()
             running_loss += loss
@@ -381,7 +384,7 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
                 print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, len(train_2_loader), loss.item()))
         
         # Log the loss to wandb
-        if not args.no_wandb: wandb.log({'train_loss'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): running_loss.item() / len(train_2_loader)})
+        if not args.no_wandb: wandb.log({'train_loss'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): running_loss.item() / len(train_2_loader)})
 
         # can also do all losses at once like below, but that's GD, not stochastic, so might train worse...
         # all_losses = running_loss_CLIP/(len(train_loader)*args.batch_size) + running_loss/(len(train_2_loader)*args.batch_size)
@@ -389,25 +392,25 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
         # optimizer.step()
 
         #NOTE: EVALUATION CURRENTLY ASSUMES ONE OUTPUT LABEL
-        if (epoch+1) % 2 == 0:
-            acc = evaluate(model, val_loader, device, model_info)
-            print('Test accuracy rgb_har: {:.4f} %'.format(acc))
-            if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-            #The snippet below is to save the best model
-            best_val_acc=0
-            best_val_file= None
-            if not os.path.exists("./models"):
-                os.mkdir("./models")
-            for f in os.listdir('./models/'):
-                prefix = model_info['project_name']+'_best_model'
-                if f.startswith(prefix):
-                    best_val_acc = float(f.split("_")[-1][:-3]) #get the accuracy from the filename, remove .pth in the end
-                    best_val_file = os.path.join("./models",f)
-            if acc > best_val_acc:
-                if best_val_file: os.remove(best_val_file)
-                best_val_acc = acc
-                fname = f'./models/{model_info["project_name"]}_best_model{model.hidden_size}_{acc:.4f}.pt'
-                torch.save(model.state_dict(), fname)
+        # if (epoch+1) % 2 == 0:
+        #     acc = evaluate(model, val_loader, device, model_info)
+        #     print('Test accuracy rgb_har: {:.4f} %'.format(acc))
+        #     if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
+        #     #The snippet below is to save the best model
+        #     best_val_acc=0
+        #     best_val_file= None
+        #     if not os.path.exists("./models"):
+        #         os.mkdir("./models")
+        #     for f in os.listdir('./models/'):
+        #         prefix = model_info['project_name']+'_best_model'
+        #         if f.startswith(prefix):
+        #             best_val_acc = float(f.split("_")[-1][:-3]) #get the accuracy from the filename, remove .pth in the end
+        #             best_val_file = os.path.join("./models",f)
+        #     if acc > best_val_acc:
+        #         if best_val_file: os.remove(best_val_file)
+        #         best_val_acc = acc
+        #         fname = f'./models/{model_info["project_name"]}_best_model{model.hidden_size}_{acc:.4f}.pt'
+        #         torch.save(model.state_dict(), fname)
 
         if (epoch+1) % 2 == 0:
             #Finally evaluate on camera, imu, camera+imu
@@ -426,11 +429,10 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
             if not args.no_wandb: wandb.log({'val_acc'+(f'_{imu_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
             print('Test accuracy IMU: {:.4f} %'.format(acc))
 
-            #this is done above!
-            # print("Evaluating on RGB and IMU")
-            # acc = evaluate(model, val_loader, device, model_info=model_info)
-            # print('\tTest accuracy: {:.4f} %'.format(acc))
-            # acc = CLIP_evaluate(model, val_loader, device, model_info)
+            print("Evaluating on RGB and IMU")
+            acc = evaluate(model, val_loader, device, model_info=model_info)
+            if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
+            print('Test accuracy: {:.4f} %'.format(acc))
 
 
 
