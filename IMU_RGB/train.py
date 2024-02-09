@@ -53,6 +53,7 @@ class CM_Fusion(nn.Module):
         self.hidden_size = hidden_size #here hiddent size will be the size the two features join at (addition)
         self.FE_rgb = RGB_Action(hidden_size, rgb_video_length)
         self.FE_imu = IMU_MLP(input_size, hidden_size*2, hidden_size)
+        # self.FE_imu = IMU_CNN(input_size, hidden_size*2, hidden_size)
         self.joint_processing = IMU_MLP(hidden_size, hidden_size//2, output_size)
         self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.07))
 
@@ -84,7 +85,7 @@ class Middle_Fusion(nn.Module):
     def forward(self, x):
         z_rgb = self.rgb_model(x[0])
         z_imu = self.imu_model(x[1])
-        z_sum = (z_rgb+z_imu)/2
+        z_sum = z_rgb + z_imu
         out = self.joint_processing(z_sum)
         return out
 
@@ -199,7 +200,32 @@ class joint_IMU_MLP(nn.Module): #This is IMU to PID+Action
         action_features = self.action_features(x)
         out = self.action(torch.cat((pid_out, action_features), dim=1)) #cat on dim1 to keep batch size
         return out
-    
+
+#Define 1D CNN model
+class IMU_CNN(nn.Module):
+    def __init__(self, input_channels, hidden_size, output_size):
+        super(IMU_CNN, self).__init__()
+        self.hidden_size = hidden_size
+        self.layers = nn.Sequential(
+            nn.Conv1d(input_channels, hidden_size, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm1d(hidden_size),
+            nn.ReLU(),
+            nn.MaxPool1d(kernel_size=3, stride=3),
+            nn.Conv1d(hidden_size, hidden_size//2, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm1d(hidden_size//2),
+            nn.ReLU(),
+            nn.MaxPool1d(kernel_size=2, stride=2),
+            nn.Conv1d(hidden_size//2, hidden_size//4, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm1d(hidden_size//4),
+            nn.ReLU(),
+            nn.MaxPool1d(kernel_size=2, stride=2),
+        )
+        # assuming starting dim is 6x180 output should be hidden_size/4 x 15
+
+        self.fc = nn.Sequential(
+            nn.Linear(hidden_size//4*15, output_size, dtype=torch.float32),
+        )
+
 class IMU_MLP(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(IMU_MLP, self).__init__()
@@ -266,6 +292,8 @@ def train(model, train_loader, val_loader, criterion, optimizer, num_epochs, dev
             if model_info['fusion_type'] == 'cross_modal':
                 outputs = model(inputs, model_info['sensors'])
             else:
+                inputs=[inputs[0],torch.zeros_like(inputs[1])] #only test rgb
+                # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
                 outputs = model(inputs)
             if len(model_info['tasks']) == 2:
                 loss = criterion(outputs[0], labels[0].to(device)) + criterion(outputs[1], labels[1].to(device))
@@ -327,7 +355,7 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
             logits_per_imu = logits_per_rgb.t()
 
             ground_truth = torch.arange(len(inputs[0]),dtype=torch.long,device=device)
-            total_loss = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))/2
+            total_loss = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))/2*(1-args.beta)
             total_loss.backward()
             optimizer.step()
             running_loss_CLIP += total_loss
@@ -376,7 +404,7 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
             # if len(model_info['tasks']) == 2:
             #     loss = criterion(outputs[0], labels[0].to(device)) + criterion(outputs[1], labels[1].to(device))
             # else:
-            loss = criterion(outputs, labels.to(device))
+            loss = criterion(outputs, labels.to(device))*args.beta
             loss.backward()
             optimizer.step()
             running_loss += loss
@@ -546,6 +574,7 @@ def shared_train(model, train_loader, val_loader, criterion, optimizer, num_epoc
                 fname = f'./models/{model_info["project_name"]}-FEs_best_model{model.hidden_size}_{acc:.4f}.pt'
                 torch.save(model.state_dict(), fname)
 
+
 #NOTE: EVALUATION CURRENTLY ASSUMES ONE OUTPUT LABEL
 # Define evaluation loop
 def evaluate(model, val_loader, device, model_info):
@@ -555,6 +584,45 @@ def evaluate(model, val_loader, device, model_info):
         total = 0
         for data_batch in val_loader:
             inputs, labels = decouple_inputs(data_batch, model_info, device=device)
+
+            #NOTE: DELETE THIS BEFORE FINAL RUNNING THING
+            inputs=[inputs[0],torch.zeros_like(inputs[1])] 
+            # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
+            if model_info['fusion_type'] == 'cross_modal':
+                outputs = model(inputs, model_info['sensors'])
+            else:
+                outputs = model(inputs)
+            _, predicted = torch.max(outputs.cpu().data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum()
+
+        print("RGB ONLY ACC:", 100 * correct / total)
+              
+        correct = 0
+        total = 0
+        for data_batch in val_loader:
+            inputs, labels = decouple_inputs(data_batch, model_info, device=device)
+            inputs = [torch.zeros_like(inputs[0]),inputs[1]]
+            if model_info['fusion_type'] == 'cross_modal':
+                outputs = model(inputs, model_info['sensors'])
+            else:
+                outputs = model(inputs)
+            _, predicted = torch.max(outputs.cpu().data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum()
+        print("IMU ONLY ACC:", 100 * correct / total)
+
+        correct = 0
+        total = 0
+        for data_batch in val_loader:
+            inputs, labels = decouple_inputs(data_batch, model_info, device=device)
+
+
+            #NOTE: DELETE THIS BEFORE FINAL RUNNING THING
+            # inputs=[inputs[0],torch.zeros_like(inputs[1])] 
+            # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
+
+
             if model_info['fusion_type'] == 'cross_modal':
                 outputs = model(inputs, model_info['sensors'])
             else:
@@ -571,6 +639,7 @@ def evaluate(model, val_loader, device, model_info):
             #     for i in incorrect_indices:
             #         print("Predicted:", actions_dict[predicted[i].item()+1], ", Actual:", actions_dict[labels[i].item()+1])#, ", Path:", path[i])
                     
+        print("BOTH ONLY ACC:", 100 * correct / total)
 
         return 100 * correct / total
 
@@ -617,6 +686,11 @@ def main():
     # peaked 94 % at 149 steps (or 150 steps)
     # 95.95% epochs at 347 steps
     # python train.py --batch_size=8 --learning_rate=0.0001485682045159312 --optimizer=Adam --hidden_size=2048 --num_epochs=240
+    # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='middle' 
+    # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:2' --fusion_type='early'
+    # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:3' --fusion_type='late'
+#python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --experiment=3
+    
 
     # Parse command-line arguments
     parser = ArgumentParser()
@@ -630,6 +704,8 @@ def main():
     parser.add_argument('--hidden_size', type=int, default=2048)
     parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--device', type=str, default='cuda:0')
+    parser.add_argument('--fusion_type', type=str, default='cross_modal')
+    parser.add_argument('--beta', type=float, default=0.66)
     global args
     args = parser.parse_args()
 
@@ -637,7 +713,7 @@ def main():
     model_info = {
         'sensors' : ['RGB', 'IMU'], #['RGB', 'IMU'] #NOTE: Keep the order here consistent for naming purposes
         'tasks' : ['HAR'], #['HAR', 'PID'],
-        'fusion_type' : 'cross_modal', #'cross_modal', # 'early', 'middle', 'late', 'cross_modal'
+        'fusion_type' : args.fusion_type, #'middle', #'cross_modal', # 'early', 'middle', 'late', 'cross_modal'
         'num_classes' : -1,
         'project_name' : ""
     }
@@ -685,6 +761,7 @@ def main():
         datapath = "Both_splits/both_45_45_10_#1"
     else:
         datapath = "Both_splits/both_80_20_#1"
+
     base_path = "/home/akamboj2/data/utd-mhad/"
     train_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train.txt")
     val_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"val.txt")
@@ -696,6 +773,15 @@ def main():
         train_2_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train_2.txt")
         train_2_dataset = RGB_IMU_Dataset(train_2_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
         train_2_loader = torch.utils.data.DataLoader(train_2_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
+
+    # #NOTE DELETE THIS:
+    # datapath = "Both_splits/both_45_45_10_#1"
+    # train_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train_2.txt")
+    # val_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"val.txt")
+    # train_dataset = RGB_IMU_Dataset(train_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
+    # train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
+    # val_dataset = RGB_IMU_Dataset(val_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
+    # val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
     # Define the model, loss function, and optimizer
     if 'IMU' in model_info['sensors'] and 'RGB' in model_info['sensors']:
@@ -736,7 +822,7 @@ def main():
                 break
         print("Evaluating model: ", model_path)
         model.load_state_dict(torch.load(model_path))
-        acc = evaluate(model, val_loader, device)
+        acc = evaluate(model, val_loader, device, model_info=model_info)
         print('Test accuracy: {:.4f} %'.format(acc))
     else:
         if model_info['fusion_type'] == 'cross_modal':
