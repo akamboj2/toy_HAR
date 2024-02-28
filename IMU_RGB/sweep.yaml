@@ -1,12 +1,16 @@
 program: train.py
-name: middleFusion_avg
+name: exp3_beta
 method: bayes
 metric:
   goal: maximize
-  name: val_acc
+  name: val_acc_['IMU']
 parameters:
   device: 
     values: ["cuda:1"]
+  experiment: 
+    values: [3]
+  fusion_type: 
+    values: ['cross_modal']
   num_epochs:
     max: 400
     min: 20
@@ -14,6 +18,10 @@ parameters:
   learning_rate:
     max: 0.1
     min: 0.000001
+    distribution: uniform
+  beta:
+    max: 1
+    min:  0
     distribution: uniform
   optimizer:
     values: ["Adam", "SGD"]
