@@ -580,30 +580,29 @@ def shared_train(model, train_loader, val_loader, criterion, optimizer, num_epoc
 def evaluate(model, val_loader, device, model_info):
     model.eval()
     with torch.no_grad():
+
+        # FIRST FEED in only RGB data
         correct = 0
         total = 0
         for data_batch in val_loader:
             inputs, labels = decouple_inputs(data_batch, model_info, device=device)
-
-            #NOTE: DELETE THIS BEFORE FINAL RUNNING THING
-            inputs=[inputs[0],torch.zeros_like(inputs[1])] 
-            # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
             if model_info['fusion_type'] == 'cross_modal':
+                inputs=[inputs[0],torch.zeros_like(inputs[1])] 
                 outputs = model(inputs, model_info['sensors'])
             else:
                 outputs = model(inputs)
             _, predicted = torch.max(outputs.cpu().data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum()
-
         print("RGB ONLY ACC:", 100 * correct / total)
               
+        #SECOND  Only feed in IMU data
         correct = 0
         total = 0
         for data_batch in val_loader:
             inputs, labels = decouple_inputs(data_batch, model_info, device=device)
-            inputs = [torch.zeros_like(inputs[0]),inputs[1]]
             if model_info['fusion_type'] == 'cross_modal':
+                inputs = [torch.zeros_like(inputs[0]),inputs[1]]
                 outputs = model(inputs, model_info['sensors'])
             else:
                 outputs = model(inputs)
@@ -612,17 +611,11 @@ def evaluate(model, val_loader, device, model_info):
             correct += (predicted == labels).sum()
         print("IMU ONLY ACC:", 100 * correct / total)
 
+        #THIRD Feed in both RGB and IMU data (this is what is logged to wandb (bc it is returned))
         correct = 0
         total = 0
         for data_batch in val_loader:
             inputs, labels = decouple_inputs(data_batch, model_info, device=device)
-
-
-            #NOTE: DELETE THIS BEFORE FINAL RUNNING THING
-            # inputs=[inputs[0],torch.zeros_like(inputs[1])] 
-            # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
-
-
             if model_info['fusion_type'] == 'cross_modal':
                 outputs = model(inputs, model_info['sensors'])
             else:
@@ -689,7 +682,7 @@ def main():
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='middle' 
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:2' --fusion_type='early'
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:3' --fusion_type='late'
-#python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --experiment=3
+    # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:1' --experiment=3
     
 
     # Parse command-line arguments
