@@ -95,7 +95,7 @@ class Early_Fusion(nn.Module):
         self.hidden_size = hidden_size #here hidden size will be the size the two models squentially join at
         self.rgb_model = RGB_Action(hidden_size, rgb_video_length) #here we use hiddent size to connect rgb and imu into one big model
         self.imu_model = IMU_MLP(hidden_size, hidden_size//2, output_size)
-        
+
 
     def forward(self, x):
         # Just flatten, add the data, and unflatten
@@ -414,32 +414,6 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
         # Log the loss to wandb
         if not args.no_wandb: wandb.log({'train_loss'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): running_loss.item() / len(train_2_loader)})
 
-        # can also do all losses at once like below, but that's GD, not stochastic, so might train worse...
-        # all_losses = running_loss_CLIP/(len(train_loader)*args.batch_size) + running_loss/(len(train_2_loader)*args.batch_size)
-        # all_losses.backward()
-        # optimizer.step()
-
-        #NOTE: EVALUATION CURRENTLY ASSUMES ONE OUTPUT LABEL
-        # if (epoch+1) % 2 == 0:
-        #     acc = evaluate(model, val_loader, device, model_info)
-        #     print('Test accuracy rgb_har: {:.4f} %'.format(acc))
-        #     if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-        #     #The snippet below is to save the best model
-        #     best_val_acc=0
-        #     best_val_file= None
-        #     if not os.path.exists("./models"):
-        #         os.mkdir("./models")
-        #     for f in os.listdir('./models/'):
-        #         prefix = model_info['project_name']+'_best_model'
-        #         if f.startswith(prefix):
-        #             best_val_acc = float(f.split("_")[-1][:-3]) #get the accuracy from the filename, remove .pth in the end
-        #             best_val_file = os.path.join("./models",f)
-        #     if acc > best_val_acc:
-        #         if best_val_file: os.remove(best_val_file)
-        #         best_val_acc = acc
-        #         fname = f'./models/{model_info["project_name"]}_best_model{model.hidden_size}_{acc:.4f}.pt'
-        #         torch.save(model.state_dict(), fname)
-
         if (epoch+1) % 2 == 0:
             #Finally evaluate on camera, imu, camera+imu
             imu_only = model_info.copy()
@@ -526,7 +500,7 @@ def CLIP_train(model, train_loader, val_loader, criterion, optimizer, num_epochs
 
 # Shared representation space alignment training
 def shared_train(model, train_loader, val_loader, criterion, optimizer, num_epochs, device, model_info):
-
+ # Here we don't align the reprsentations with clip, we make the Camera representation == to the IMU one precisely...
     loss_imu = nn.MSELoss()
 
     for epoch in range(num_epochs):
@@ -585,61 +559,23 @@ def evaluate(model, val_loader, device, model_info):
         for data_batch in val_loader:
             inputs, labels = decouple_inputs(data_batch, model_info, device=device)
 
-            #NOTE: DELETE THIS BEFORE FINAL RUNNING THING
-            inputs=[inputs[0],torch.zeros_like(inputs[1])] 
-            # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
             if model_info['fusion_type'] == 'cross_modal':
                 outputs = model(inputs, model_info['sensors'])
-            else:
+            else: # sensor fusion attempt
+                # Only in sensor fusion case, we need to handle missing inputs
+                # the cross modal model will handle this internally, but the sensor fusion model assumes both inputs
+                # Replace missing inputs with zeros, if any is missing
+                if 'RGB' in model_info['sensors'] and 'IMU' not in model_info['sensors']: 
+                    print("In rgb only:")
+                    inputs = [inputs[0],torch.zeros_like(inputs[1])]
+                elif 'RGB' not in model_info['sensors'] and 'IMU' in model_info['sensors']: 
+                    print("in imu only:")
+                    inputs = [torch.zeros_like(inputs[0]),inputs[1]]
                 outputs = model(inputs)
+
             _, predicted = torch.max(outputs.cpu().data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum()
-
-        print("RGB ONLY ACC:", 100 * correct / total)
-              
-        correct = 0
-        total = 0
-        for data_batch in val_loader:
-            inputs, labels = decouple_inputs(data_batch, model_info, device=device)
-            inputs = [torch.zeros_like(inputs[0]),inputs[1]]
-            if model_info['fusion_type'] == 'cross_modal':
-                outputs = model(inputs, model_info['sensors'])
-            else:
-                outputs = model(inputs)
-            _, predicted = torch.max(outputs.cpu().data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum()
-        print("IMU ONLY ACC:", 100 * correct / total)
-
-        correct = 0
-        total = 0
-        for data_batch in val_loader:
-            inputs, labels = decouple_inputs(data_batch, model_info, device=device)
-
-
-            #NOTE: DELETE THIS BEFORE FINAL RUNNING THING
-            # inputs=[inputs[0],torch.zeros_like(inputs[1])] 
-            # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
-
-
-            if model_info['fusion_type'] == 'cross_modal':
-                outputs = model(inputs, model_info['sensors'])
-            else:
-                outputs = model(inputs)
-            _, predicted = torch.max(outputs.cpu().data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum()
-
-            # # Print incorrect predictions
-            # headers = ["Predicted, Actual, Path"]
-            # data = []
-            # if (predicted == labels).sum() != val_loader.batch_size:
-            #     incorrect_indices = (predicted != labels).nonzero()[:,0]
-            #     for i in incorrect_indices:
-            #         print("Predicted:", actions_dict[predicted[i].item()+1], ", Actual:", actions_dict[labels[i].item()+1])#, ", Path:", path[i])
-                    
-        print("BOTH ONLY ACC:", 100 * correct / total)
 
         return 100 * correct / total
 
@@ -689,7 +625,10 @@ def main():
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='middle' 
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:2' --fusion_type='early'
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:3' --fusion_type='late'
-#python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --experiment=3
+    # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --experiment=3
+
+    # Scratch:
+    # python train.py --batch_size=8 --learning_rate=0.015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='cross_modal' --experiment=2
     
 
     # Parse command-line arguments
@@ -774,15 +713,6 @@ def main():
         train_2_dataset = RGB_IMU_Dataset(train_2_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
         train_2_loader = torch.utils.data.DataLoader(train_2_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
-    # #NOTE DELETE THIS:
-    # datapath = "Both_splits/both_45_45_10_#1"
-    # train_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train_2.txt")
-    # val_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"val.txt")
-    # train_dataset = RGB_IMU_Dataset(train_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
-    # train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
-    # val_dataset = RGB_IMU_Dataset(val_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
-    # val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
-
     # Define the model, loss function, and optimizer
     if 'IMU' in model_info['sensors'] and 'RGB' in model_info['sensors']:
         if model_info['fusion_type'] == 'cross_modal':
@@ -829,7 +759,8 @@ def main():
             
             if args.experiment==1:
 
-                # ----------- EXPERIMENT 1 and 3----------- 
+                # ----------- EXPERIMENT 1 ----------- 
+                # First Align, then freeze encoders and train RGB, then evaluate
 
                 #First align modalities representations
                 print("Aligning Modalities")
@@ -861,21 +792,22 @@ def main():
                 for param in model.FE_imu.parameters():
                     param.requires_grad = False
 
-                #Then train the model with camera
-                print("Training on RGB only")
                 camera_only = model_info.copy()
                 camera_only['sensors'] = ['RGB']
-                train(model, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info=camera_only)
-                ## or load it from the best model
-                # print("Loading model RGB trained model")
-                # models = os.listdir('./models/')
-                # for m in models:
-                #     prefix = model_info['project_name']+'_best_model'
-                #     if m.startswith(prefix):
-                #         model_path = os.path.join('./models/', m)
-                #         break
-                # print("Loaded model: ", model_path)
-                # model.load_state_dict(torch.load(model_path))
+
+                #Then train the model with camera HAR 
+                # print("Training on RGB only")
+                # train(model, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info=camera_only)
+                # or load it from the best model
+                print("Loading model RGB trained model")
+                models = os.listdir('./models/')
+                for m in models:
+                    prefix = model_info['project_name']+'_best_model'
+                    if m.startswith(prefix):
+                        model_path = os.path.join('./models/', m)
+                        break
+                print("Loaded model: ", model_path)
+                model.load_state_dict(torch.load(model_path))
 
                 #Finally evaluate on camera, imu, camera+imu
                 imu_only = model_info.copy()
@@ -895,11 +827,15 @@ def main():
 
             elif args.experiment==2:
                 # ----------- EXPERIMENT 2 ----------- 
+                # First Train RGB HAR, freeze RGB encoder, then align, then evaluate 
+                # I feel like this should work for shared representation space...
+
                 # First train RGB HAR model
                 print("Training RGB HAR")
                 camera_only = model_info.copy()
                 camera_only['sensors'] = ['RGB']
                 train(model, train_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info=camera_only)
+
 
                 # Then Freeze RGB
                 for param in model.FE_rgb.parameters():
@@ -928,19 +864,16 @@ def main():
             elif args.experiment==3:
                     # print("In here")
                     # ----------- EXPERIMENT 3 -----------
-                    # This is same as 1 CLIP but with interweaving
+                    # While training RGB HAR Algin Representations (do both intermittantly), than evaluate
 
                     #Align modalities and train rgb har together
                     print("Aligning Modalities and Training RGB HAR")
                     inter_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
-                
 
                     #Perform CLIP Eval:
                     print("Evaluating on RGB and IMU CLIP representations")
                     acc = CLIP_evaluate(model, val_loader, device, model_info)
                     print('\tTest accuracy: {:.4f} %'.format(acc))
-                    # exit()
-                    
 
                     #Finally evaluate on camera, imu, camera+imu
                     imu_only = model_info.copy()
