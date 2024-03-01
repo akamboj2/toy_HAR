@@ -561,17 +561,17 @@ def evaluate(model, val_loader, device, model_info):
         for data_batch in val_loader:
             inputs, labels = decouple_inputs(data_batch, model_info, device=device)
             if model_info['fusion_type'] == 'cross_modal':
-                inputs = [torch.zeros_like(inputs[0]),inputs[1]]
+                # inputs = [torch.zeros_like(inputs[0]),inputs[1]] # wait. we don't want to this for cross-fusion write? ... 
                 outputs = model(inputs, model_info['sensors'])
             else: # sensor fusion attempt
                 # Only in sensor fusion case, we need to handle missing inputs
                 # the cross modal model will handle this internally, but the sensor fusion model assumes both inputs
                 # Replace missing inputs with zeros, if any is missing
                 if 'RGB' in model_info['sensors'] and 'IMU' not in model_info['sensors']: 
-                    print("In rgb only:")
+                    # print("In rgb only:")
                     inputs = [inputs[0],torch.zeros_like(inputs[1])]
                 elif 'RGB' not in model_info['sensors'] and 'IMU' in model_info['sensors']: 
-                    print("in imu only:")
+                    # print("in imu only:")
                     inputs = [torch.zeros_like(inputs[0]),inputs[1]]
                 outputs = model(inputs)
             _, predicted = torch.max(outputs.cpu().data, 1)
@@ -846,6 +846,8 @@ def main():
                 print("Aligning Modalities")
                 shared_train(model, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
 
+                torch.save(model.state_dict(), "debug_exp2.pt")
+                
                #Finally evaluate on camera, imu, camera+imu
                 imu_only = model_info.copy()
                 imu_only['sensors'] = ['IMU']
