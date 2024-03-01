@@ -356,6 +356,8 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
 
             ground_truth = torch.arange(len(inputs[0]),dtype=torch.long,device=device)
             total_loss = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))/2*(1-args.beta)
+            # Why are we averaging and scaling by beta? don't we usually just add losses together?
+
             total_loss.backward()
             optimizer.step()
             running_loss_CLIP += total_loss
@@ -416,6 +418,90 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
 
         if (epoch+1) % 2 == 0:
             eval_log(model, val_loader, device, model_info)
+
+
+def intra_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, num_epochs, device, model_info):
+    # Here we train both models within the same batch. e.g. there is only one loss being updated
+    
+    model.train()
+    loss_imu = nn.CrossEntropyLoss()
+    loss_rgb = nn.CrossEntropyLoss()
+
+    for epoch in range(num_epochs):
+
+        # Do both training at the same time
+        model.train()
+        camera_only = model_info.copy()
+        camera_only['sensors'] = ['RGB']
+        running_loss_CLIP = 0.0 #Running loss is through the whole epoch, not just one batch
+        running_loss_HAR = 0.0
+
+        if len(train_loader) != len(train_2_loader):
+            print("Warning: train_loader and train_2_loader have different lengths, this might cause issues")
+        for i, data_batch in enumerate(zip(train_loader,train_2_loader)):
+            loss_CLIP=0.0
+            loss_HAR=0.0
+
+            data_clip, data_rgbHAR = data_batch
+            inputs_clip, labels_clip = decouple_inputs(data_clip, model_info, device)
+            inputs_rgbHAR, labels_rgbHAR = decouple_inputs(data_rgbHAR, model_info=camera_only, device=device)
+
+            optimizer.zero_grad()
+            # CLIP stuff first
+            # Note: CLIP benefits from larger batch size, so by sharing the batch size with HAR, we might be degrading CLIP performance
+            z_rgb = model.FE_rgb(inputs_clip[0]) # z is the latent feature vector
+            z_imu = model.FE_imu(inputs_clip[1])
+            z_rgb = z_rgb / z_rgb.norm(dim=-1, keepdim=True)
+            z_imu = z_imu / z_imu.norm(dim=-1, keepdim=True)
+            logits_per_rgb =  z_rgb @ z_imu.t()
+            logits_per_imu = logits_per_rgb.t()
+            ground_truth = torch.arange(len(inputs_clip[0]),dtype=torch.long,device=device)
+            loss_CLIP = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))#/2*(1-args.beta)
+            
+            # Now do the RGB model training
+            assert model_info['fusion_type'] == 'cross_modal' #otherwise next line will be an error
+            outputs = model(inputs_rgbHAR, sensors=['RGB'])
+            loss_HAR = criterion(outputs, labels_rgbHAR.to(device))*args.beta
+            total_loss = loss_CLIP + loss_HAR
+            
+            #now optimize with both losses
+            total_loss.backward()
+            optimizer.step()
+            #let's also log both losses separately, if one seems to be dominating we can scale it down
+            running_loss_CLIP += loss_CLIP
+            running_loss_HAR += loss_HAR
+
+            if (i+1) % 10 == 0:
+                #Total loss every step logged to the terminal
+                print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, len(train_loader), total_loss.item()))
+
+        # Log the loss to wandb
+        if not args.no_wandb: 
+            wandb.log({'CLIP_loss': running_loss_CLIP.item() / len(train_loader)})
+            wandb.log({'train_loss'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): running_loss_HAR.item() / len(train_2_loader)})
+
+        #Eval and save best model
+        if (epoch+1) % 2 == 0:
+            acc = CLIP_evaluate(model, val_loader, device, model_info)
+            print('Test accuracy CLIP: {:.4f} %'.format(acc))
+            if not args.no_wandb: wandb.log({'CLIP_val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
+            eval_log(model, val_loader, device, model_info) # eval 3 different inputs on HAR output
+            #The snippet below is to save the best model by CLIP accuracy
+            best_val_acc=0
+            best_val_file= None
+            if not os.path.exists("./models"):
+                os.mkdir("./models")
+            for f in os.listdir('./models/'):
+                prefix = model_info['project_name']+"-FEs"+'_best_model'
+                if f.startswith(prefix):
+                    best_val_acc = float(f.split("_")[-1][:-3]) #get the accuracy from the filename, remove .pth in the end
+                    best_val_file = os.path.join("./models",f)
+            if acc > best_val_acc:
+                if best_val_file: os.remove(best_val_file)
+                best_val_acc = acc
+                fname = f'./models/{model_info["project_name"]}-FEs_best_model{model.hidden_size}_{acc:.4f}.pt'
+                torch.save(model.state_dict(), fname)
+
 
 def eval_log(model, val_loader, device, model_info):
     #Finally evaluate on camera->HAR, imu->HAR, camera+imu->HAR
@@ -885,22 +971,23 @@ def main():
                     print('\tTest accuracy: {:.4f} %'.format(acc))
 
                     #Finally evaluate on camera, imu, camera+imu
-                    imu_only = model_info.copy()
-                    imu_only['sensors'] = ['IMU']
-                    camera_only = model_info.copy()
-                    camera_only['sensors'] = ['RGB']
+                    eval_log(model, val_loader, device, model_info)
+            
+            elif args.experiment==4:
+                # ----------- EXPERIMENT 4 -----------
+                # While training RGB HAR Algin Representations (do both intermittantly), than evaluate
 
-                    print("Evaluating on RGB only")
-                    acc = evaluate(model, val_loader, device, model_info=camera_only)
-                    print('\tTest accuracy: {:.4f} %'.format(acc))
+                #Align modalities and train rgb har together
+                print("Aligning Modalities and Training RGB HAR")
+                intra_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
 
-                    print("Evaluating on IMU only")
-                    acc = evaluate(model, val_loader, device, model_info=imu_only)
-                    print('\tTest accuracy: {:.4f} %'.format(acc))
+                #Perform CLIP Eval:
+                print("Evaluating on RGB and IMU CLIP representations")
+                acc = CLIP_evaluate(model, val_loader, device, model_info)
+                print('\tTest accuracy: {:.4f} %'.format(acc))
 
-                    print("Evaluating on RGB and IMU")
-                    acc = evaluate(model, val_loader, device, model_info=model_info)
-                    print('\tTest accuracy: {:.4f} %'.format(acc))
+                #Finally evaluate on camera, imu, camera+imu
+                eval_log(model, val_loader, device, model_info)
 
 
         else:
