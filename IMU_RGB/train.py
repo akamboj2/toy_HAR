@@ -426,6 +426,7 @@ def intra_train(model, train_loader, train_2_loader, val_loader, criterion, opti
     model.train()
     loss_imu = nn.CrossEntropyLoss()
     loss_rgb = nn.CrossEntropyLoss()
+    loss_mse = nn.MSELoss()
 
     for epoch in range(num_epochs):
 
@@ -451,17 +452,22 @@ def intra_train(model, train_loader, train_2_loader, val_loader, criterion, opti
             # Note: CLIP benefits from larger batch size, so by sharing the batch size with HAR, we might be degrading CLIP performance
             z_rgb = model.FE_rgb(inputs_clip[0]) # z is the latent feature vector
             z_imu = model.FE_imu(inputs_clip[1])
+
+            # CLIP LOSS:
             z_rgb = z_rgb / z_rgb.norm(dim=-1, keepdim=True)
             z_imu = z_imu / z_imu.norm(dim=-1, keepdim=True)
             logits_per_rgb =  z_rgb @ z_imu.t()
             logits_per_imu = logits_per_rgb.t()
             ground_truth = torch.arange(len(inputs_clip[0]),dtype=torch.long,device=device)
             loss_CLIP = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))#/2*(1-args.beta)
+
+            #SHARED LOSS:
+            # loss_CLIP = loss_mse(z_imu, z_rgb)
             
             # Now do the RGB model training
             assert model_info['fusion_type'] == 'cross_modal' #otherwise next line will be an error
             outputs = model(inputs_rgbHAR, sensors=['RGB'])
-            loss_HAR = criterion(outputs, labels_rgbHAR.to(device))*args.beta
+            loss_HAR = criterion(outputs, labels_rgbHAR.to(device)) #*args.beta
             total_loss = loss_CLIP + loss_HAR
             
             #now optimize with both losses
@@ -721,14 +727,14 @@ def main():
     # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --experiment=3
 
     # Scratch:
-    # python train.py --batch_size=8 --learning_rate=0.015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='cross_modal' --experiment=2
+    # python train.py --batch_size=8 --learning_rate=0.015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:1' --fusion_type='cross_modal' --experiment=4
     
 
     # Parse command-line arguments
     parser = ArgumentParser()
     # parser.add_argument('--sweep', action='store_true')
     parser.add_argument('--num_epochs', type=int, default=100)
-    parser.add_argument('--batch_size', type=int, default=16)
+    parser.add_argument('--batch_size', type=int, default=8)
     parser.add_argument('--learning_rate', type=float, default=.001)
     parser.add_argument('--optimizer', type=str, default='Adam')
     parser.add_argument('--test', action='store_true',default=False)
