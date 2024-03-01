@@ -28,3 +28,42 @@ parameters:
   hidden_size:
     values: [64, 128, 256, 512, 1024, 2048]
 
+
+# Below for exp 2
+method: bayes
+metric:
+  goal: maximize
+  name: val_acc_['IMU']
+name: exp2
+parameters:
+  device:
+    values:
+      - cuda:2
+  experiment:
+    values:
+      - 2
+  fusion_type:
+    values:
+      - cross_modal
+  hidden_size:
+    values:
+      - 64
+      - 128
+      - 256
+      - 512
+      - 1024
+      - 2048
+  learning_rate:
+    distribution: uniform
+    max: 0.1
+    min: 1e-06
+  num_epochs:
+    distribution: int_uniform
+    max: 400
+    min: 20
+  optimizer:
+    values:
+      - Adam
+      - SGD
+program: train.py
+

@@ -415,27 +415,29 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
         if not args.no_wandb: wandb.log({'train_loss'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): running_loss.item() / len(train_2_loader)})
 
         if (epoch+1) % 2 == 0:
-            #Finally evaluate on camera, imu, camera+imu
-            imu_only = model_info.copy()
-            imu_only['sensors'] = ['IMU']
-            camera_only = model_info.copy()
-            camera_only['sensors'] = ['RGB']
+            eval_log(model, val_loader, device, model_info)
 
-            print("Evaluating on RGB only")
-            acc = evaluate(model, val_loader, device, model_info=camera_only)
-            if not args.no_wandb: wandb.log({'val_acc'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-            print('Test accuracy RGB: {:.4f} %'.format(acc))
+def eval_log(model, val_loader, device, model_info):
+    #Finally evaluate on camera->HAR, imu->HAR, camera+imu->HAR
+        imu_only = model_info.copy()
+        imu_only['sensors'] = ['IMU']
+        camera_only = model_info.copy()
+        camera_only['sensors'] = ['RGB']
 
-            print("Evaluating on IMU only")
-            acc = evaluate(model, val_loader, device, model_info=imu_only)
-            if not args.no_wandb: wandb.log({'val_acc'+(f'_{imu_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-            print('Test accuracy IMU: {:.4f} %'.format(acc))
+        print("Evaluating on RGB only")
+        acc = evaluate(model, val_loader, device, model_info=camera_only)
+        if not args.no_wandb: wandb.log({'val_acc'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
+        print('Test accuracy RGB: {:.4f} %'.format(acc))
 
-            print("Evaluating on RGB and IMU")
-            acc = evaluate(model, val_loader, device, model_info=model_info)
-            if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-            print('Test accuracy: {:.4f} %'.format(acc))
+        print("Evaluating on IMU only")
+        acc = evaluate(model, val_loader, device, model_info=imu_only)
+        if not args.no_wandb: wandb.log({'val_acc'+(f'_{imu_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
+        print('Test accuracy IMU: {:.4f} %'.format(acc))
 
+        print("Evaluating on RGB and IMU")
+        acc = evaluate(model, val_loader, device, model_info=model_info)
+        if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
+        print('Test accuracy: {:.4f} %'.format(acc))
 
 
 # CLIP based cosine similarity representation alignment training
@@ -547,6 +549,10 @@ def shared_train(model, train_loader, val_loader, criterion, optimizer, num_epoc
                 best_val_acc = acc
                 fname = f'./models/{model_info["project_name"]}-FEs_best_model{model.hidden_size}_{acc:.4f}.pt'
                 torch.save(model.state_dict(), fname)
+
+            # shared val acc is how well we can predict rgb from imu
+            # now eval imu-> har, rgb->har, and rgb+imu->har
+            eval_log(model, val_loader, device, model_info) 
 
 
 #NOTE: EVALUATION CURRENTLY ASSUMES ONE OUTPUT LABEL
@@ -846,7 +852,7 @@ def main():
                 print("Aligning Modalities")
                 shared_train(model, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
 
-                torch.save(model.state_dict(), "debug_exp2.pt")
+                # torch.save(model.state_dict(), "debug_exp2.pt")
                 
                #Finally evaluate on camera, imu, camera+imu
                 imu_only = model_info.copy()
