@@ -8,13 +8,13 @@ import scipy.io
 
 
 class RGB_IMU_Dataset(Dataset):
-    def __init__(self, split_file, video_length=50, imu_length=180, transform=None, base_path ="/home/abhi/data/utd-mhad/"):
+    def __init__(self, split_file, video_length=50, imu_length=180, transform=None, base_path ="/home/abhi/data/utd-mhad/", return_path=False):
         self.split_file = split_file
         self.transform = transform
         self.videos = []
         self.vid_length = video_length
         self.imu_length = imu_length
-
+        self.return_path = return_path
         
         #assume we are reading "path label_action label_PID" from a file
         f = open(self.split_file,'r')
@@ -84,8 +84,10 @@ class RGB_IMU_Dataset(Dataset):
             accel_data = torch.cat([accel_data, torch.zeros(self.imu_length - len(accel_data), *accel_data.shape[1:])])
 
         # return accel_data, int(label), file_path
-
-        return frames, accel_data, class_idx, pid_idx #returns TCHW video
+        if self.return_path:
+            return frames, accel_data, class_idx, pid_idx, rgb_path, imu_path
+        else:
+            return frames, accel_data, class_idx, pid_idx #returns TCHW video
 
 if __name__=='__main__':
     dir = "/home/abhi/data/utd-mhad/Both_splits/both_80_20_#1/train.txt"

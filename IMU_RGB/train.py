@@ -53,7 +53,7 @@ class CM_Fusion(nn.Module):
         self.hidden_size = hidden_size #here hiddent size will be the size the two features join at (addition)
         self.FE_rgb = RGB_Action(hidden_size, rgb_video_length)
         self.FE_imu = IMU_MLP(input_size, hidden_size*2, hidden_size)
-        # self.FE_imu = IMU_CNN(input_size, hidden_size*2, hidden_size)
+        # self.FE_imu = IMU_CNN(6, hidden_size*2, hidden_size)
         self.joint_processing = IMU_MLP(hidden_size, hidden_size//2, output_size)
         self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.07))
 
@@ -226,6 +226,13 @@ class IMU_CNN(nn.Module):
             nn.Linear(hidden_size//4*15, output_size, dtype=torch.float32),
         )
 
+    def forward(self, x):
+        x = x.permute(0,2,1) # permute to bs x channels x timesteps
+        out = self.layers(x)
+        out = out.view(out.shape[0], -1)
+        out = self.fc(out)
+        return out
+
 class IMU_MLP(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(IMU_MLP, self).__init__()
@@ -355,13 +362,16 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
             logits_per_imu = logits_per_rgb.t()
 
             ground_truth = torch.arange(len(inputs[0]),dtype=torch.long,device=device)
-            total_loss = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))/2*(1-args.beta)
+            if args.beta is None:
+                total_loss = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))/2
+            else:
+                total_loss = (loss_rgb(logits_per_rgb,ground_truth) + loss_imu(logits_per_imu,ground_truth))/2*(1-args.beta)
             # Why are we averaging and scaling by beta? don't we usually just add losses together?
 
             total_loss.backward()
             optimizer.step()
             running_loss_CLIP += total_loss
-            if (i+1) % 5 == 0:
+            if (i+1) % 10 == 0:
                 print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, len(train_loader), total_loss.item()))
         
         # Log the loss to wandb
@@ -406,11 +416,14 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
             # if len(model_info['tasks']) == 2:
             #     loss = criterion(outputs[0], labels[0].to(device)) + criterion(outputs[1], labels[1].to(device))
             # else:
-            loss = criterion(outputs, labels.to(device))*args.beta
+            if args.beta is None:
+                loss = criterion(outputs, labels.to(device))
+            else:
+                loss = criterion(outputs, labels.to(device))*args.beta
             loss.backward()
             optimizer.step()
             running_loss += loss
-            if (i+1) % 5 == 0:
+            if (i+1) % 10 == 0:
                 print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, len(train_2_loader), loss.item()))
         
         # Log the loss to wandb
@@ -574,7 +587,7 @@ def CLIP_train(model, train_loader, val_loader, criterion, optimizer, num_epochs
         #Eval and save best model
         if (epoch+1) % 2 == 0:
             acc = CLIP_evaluate(model, val_loader, device, model_info)
-            print('Test accuracy: {:.4f} %'.format(acc))
+            print('Val accuracy: {:.4f} %'.format(acc))
             if not args.no_wandb: wandb.log({'CLIP_val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
             #The snippet below is to save the best model
             best_val_acc=0
@@ -624,7 +637,7 @@ def shared_train(model, train_loader, val_loader, criterion, optimizer, num_epoc
         #Eval and save best model
         if (epoch+1) % 2 == 0:
             acc = CLIP_evaluate(model, val_loader, device, model_info)
-            print('Test accuracy: {:.4f} %'.format(acc))
+            print('Val accuracy: {:.4f} %'.format(acc))
             if not args.no_wandb: wandb.log({'Shared_val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
             #The snippet below is to save the best model
             best_val_acc=0
@@ -727,7 +740,8 @@ def main():
     # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --experiment=3
 
     # Scratch:
-    # python train.py --batch_size=8 --learning_rate=0.015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:1' --fusion_type='cross_modal' --experiment=4
+    # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='cross_modal' --experiment=4
+    # python train.py --batch_size=8 --experiment=3 --learning_rate=0.00015 --beta=None
     
 
     # Parse command-line arguments
@@ -743,7 +757,7 @@ def main():
     parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--device', type=str, default='cuda:0')
     parser.add_argument('--fusion_type', type=str, default='cross_modal')
-    parser.add_argument('--beta', type=float, default=0.66)
+    parser.add_argument('--beta', type=float, default=None) #weighting clip vs har in inter loss
     global args
     args = parser.parse_args()
 
@@ -796,17 +810,23 @@ def main():
     # Load the dataset
     # datapath = "Inertial_splits/action_80_20_#1" if label_category == 'action' else "Inertial_splits/pid_80_20_#1"
     if model_info['fusion_type'] == 'cross_modal':
-        datapath = "Both_splits/both_45_45_10_#1"
+        # datapath = "Both_splits/both_45_45_10_#1"
+        datapath = "Both_splits/both_42.5_42.5_5_10_#1"
     else:
         datapath = "Both_splits/both_80_20_#1"
 
     base_path = "/home/akamboj2/data/utd-mhad/"
     train_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train.txt")
     val_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"val.txt")
+    test_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"test.txt")
+
     train_dataset = RGB_IMU_Dataset(train_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
     val_dataset = RGB_IMU_Dataset(val_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
+    test_dataset = RGB_IMU_Dataset(test_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
+
     if model_info['fusion_type'] == 'cross_modal':
         train_2_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"train_2.txt")
         train_2_dataset = RGB_IMU_Dataset(train_2_dir, video_length=rgb_video_length, transform=transforms, base_path=base_path)
@@ -835,6 +855,8 @@ def main():
             elif 'HAR' in model_info['tasks']:
                 train_loader = ((x[1], x[3]) for x in train_loader)
                 val_loader  = ((x[1], x[3]) for x in val_loader)
+    
+    
     criterion = nn.CrossEntropyLoss()
     if args.optimizer == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
@@ -845,13 +867,14 @@ def main():
     if args.test:
         models = os.listdir('./models/')
         for m in models:
-            prefix = model_info['project_name']+'_best_model'
+            # prefix = model_info['project_name']+'_best_model'
+            prefix = model_info['project_name']+'-FEs'+'_best_model'
             if m.startswith(prefix):
                 model_path = os.path.join('./models/', m)
                 break
         print("Evaluating model: ", model_path)
         model.load_state_dict(torch.load(model_path))
-        acc = evaluate(model, val_loader, device, model_info=model_info)
+        acc = evaluate(model, train_loader, device, model_info=model_info)
         print('Test accuracy: {:.4f} %'.format(acc))
     else:
         if model_info['fusion_type'] == 'cross_modal':
@@ -912,16 +935,18 @@ def main():
                 imu_only = model_info.copy()
                 imu_only['sensors'] = ['IMU']
 
+                print("Testing on Final Test Dataset")
+
                 print("Evaluating on RGB only")
-                acc = evaluate(model, val_loader, device, model_info=camera_only)
+                acc = evaluate(model, test_loader, device, model_info=camera_only)
                 print('\tTest accuracy: {:.4f} %'.format(acc))
 
                 print("Evaluating on IMU only")
-                acc = evaluate(model, val_loader, device, model_info=imu_only)
+                acc = evaluate(model, test_loader, device, model_info=imu_only)
                 print('\tTest accuracy: {:.4f} %'.format(acc))
 
                 print("Evaluating on RGB and IMU")
-                acc = evaluate(model, val_loader, device, model_info=model_info)
+                acc = evaluate(model, test_loader, device, model_info=model_info)
                 print('\tTest accuracy: {:.4f} %'.format(acc))
 
             elif args.experiment==2:
@@ -977,11 +1002,23 @@ def main():
                     print('\tTest accuracy: {:.4f} %'.format(acc))
 
                     #Finally evaluate on camera, imu, camera+imu
-                    eval_log(model, val_loader, device, model_info)
-            
+                    # eval_log(model, val_loader, device, model_info)
+                    print("Testing on Final Test Dataset")
+
+                    print("Evaluating on RGB only")
+                    acc = evaluate(model, test_loader, device, model_info=camera_only)
+                    print('\tTest accuracy: {:.4f} %'.format(acc))
+
+                    print("Evaluating on IMU only")
+                    acc = evaluate(model, test_loader, device, model_info=imu_only)
+                    print('\tTest accuracy: {:.4f} %'.format(acc))
+
+                    print("Evaluating on RGB and IMU")
+                    acc = evaluate(model, test_loader, device, model_info=model_info)
+                    print('\tTest accuracy: {:.4f} %'.format(acc))
             elif args.experiment==4:
                 # ----------- EXPERIMENT 4 -----------
-                # While training RGB HAR Algin Representations (do both intermittantly), than evaluate
+                # While training RGB HAR Algin Representations this time within the batch, than evaluate
 
                 #Align modalities and train rgb har together
                 print("Aligning Modalities and Training RGB HAR")
