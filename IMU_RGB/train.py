@@ -52,8 +52,8 @@ class CM_Fusion(nn.Module):
         super(CM_Fusion, self).__init__()
         self.hidden_size = hidden_size #here hiddent size will be the size the two features join at (addition)
         self.FE_rgb = RGB_Action(hidden_size, rgb_video_length)
-        self.FE_imu = IMU_MLP(input_size, hidden_size*2, hidden_size)
-        # self.FE_imu = IMU_CNN(6, hidden_size*2, hidden_size)
+        # self.FE_imu = IMU_MLP(input_size, hidden_size*2, hidden_size)
+        self.FE_imu = IMU_CNN(6, hidden_size*2, hidden_size)
         self.joint_processing = IMU_MLP(hidden_size, hidden_size//2, output_size)
         self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.07))
 
@@ -287,7 +287,8 @@ def decouple_inputs(data_batch, model_info, device):
     return inputs, labels
 
 # Define the training loop
-def train(model, train_loader, val_loader, criterion, optimizer, num_epochs, device, model_info):
+def train(model, train_loader, val_loader, criterion, optimizer, scheduler,  num_epochs, device, model_info):   
+
     for epoch in range(num_epochs):
         model.train()
         running_loss = 0.0
@@ -308,6 +309,8 @@ def train(model, train_loader, val_loader, criterion, optimizer, num_epochs, dev
                 loss = criterion(outputs, labels.to(device))
             loss.backward()
             optimizer.step()
+            # scheduler.step()
+
             running_loss += loss.item()
             if (i+1) % 5 == 0:
                 print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, len(train_loader), loss.item()))
@@ -336,7 +339,7 @@ def train(model, train_loader, val_loader, criterion, optimizer, num_epochs, dev
                 fname = f'./models/{model_info["project_name"]}_best_model{model.hidden_size}_{acc:.4f}.pt'
                 torch.save(model.state_dict(), fname)
 
-def inter_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, num_epochs, device, model_info):
+def inter_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, scheduler, num_epochs, device, model_info):
     # Here we intersperse the training for aligning representation through CLIP and training rgb har model
     
     model.train()
@@ -433,7 +436,7 @@ def inter_train(model, train_loader, train_2_loader, val_loader, criterion, opti
             eval_log(model, val_loader, device, model_info)
 
 
-def intra_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, num_epochs, device, model_info):
+def intra_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, scheduler, num_epochs, device, model_info):
     # Here we train both models within the same batch. e.g. there is only one loss being updated
     
     model.train()
@@ -546,7 +549,7 @@ def eval_log(model, val_loader, device, model_info):
 
 
 # CLIP based cosine similarity representation alignment training
-def CLIP_train(model, train_loader, val_loader, criterion, optimizer, num_epochs, device, model_info):
+def CLIP_train(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs, device, model_info):
     model.train()
     loss_imu = nn.CrossEntropyLoss()
     loss_rgb = nn.CrossEntropyLoss()
@@ -606,7 +609,7 @@ def CLIP_train(model, train_loader, val_loader, criterion, optimizer, num_epochs
                 torch.save(model.state_dict(), fname)
 
 # Shared representation space alignment training
-def shared_train(model, train_loader, val_loader, criterion, optimizer, num_epochs, device, model_info):
+def shared_train(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs, device, model_info):
  # Here we don't align the reprsentations with clip, we make the Camera representation == to the IMU one precisely...
     loss_imu = nn.MSELoss()
 
@@ -737,11 +740,14 @@ def main():
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='middle' 
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:2' --fusion_type='early'
     # python train.py --batch_size=16 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:3' --fusion_type='late'
-    # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --experiment=3
+    # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=20 --device='cuda:0' --experiment=1 --fusion_type='cross_modal' --device='cuda:0'
 
     # Scratch:
     # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=100 --device='cuda:0' --fusion_type='cross_modal' --experiment=4
     # python train.py --batch_size=8 --experiment=3 --learning_rate=0.00015 --beta=None
+
+    # Try this for all experiments
+    # python train.py --batch_size=8 --learning_rate=0.00015 --optimizer=Adam --hidden_size=2048 --num_epochs=20 --device='cuda:0' --experiment=3 --fusion_type='cross_modal' --device='cuda:0'
     
 
     # Parse command-line arguments
@@ -758,6 +764,8 @@ def main():
     parser.add_argument('--device', type=str, default='cuda:0')
     parser.add_argument('--fusion_type', type=str, default='cross_modal')
     parser.add_argument('--beta', type=float, default=None) #weighting clip vs har in inter loss
+    parser.add_argument('--lr_gamma', type=float, default=0.1) #lr decay
+    parser.add_argument('--lr_step_size', type=int, default=10)
     global args
     args = parser.parse_args()
 
@@ -810,8 +818,9 @@ def main():
     # Load the dataset
     # datapath = "Inertial_splits/action_80_20_#1" if label_category == 'action' else "Inertial_splits/pid_80_20_#1"
     if model_info['fusion_type'] == 'cross_modal':
+        # datapath = "Both_splits/both_42.5_42.5_5_10_#1"
         # datapath = "Both_splits/both_45_45_10_#1"
-        datapath = "Both_splits/both_42.5_42.5_5_10_#1"
+        datapath = "Both_splits/both_40_40_10_10_#1"
     else:
         datapath = "Both_splits/both_80_20_#1"
 
@@ -862,6 +871,7 @@ def main():
         optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
     elif args.optimizer == 'SGD':
         optimizer = optim.SGD(model.parameters(), lr=args.learning_rate, momentum=0.9)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.lr_step_size, gamma=args.lr_gamma)
 
     # Test or train the model
     if args.test:
@@ -887,19 +897,19 @@ def main():
                 #First align modalities representations
                 print("Aligning Modalities")
                 fname = f'./models/cross-modal/trained-FEs-{model_info["project_name"]}.pt'
-                # CLIP_train(model, train_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
+                CLIP_train(model, train_loader, val_loader, criterion, optimizer, scheduler, args.num_epochs, device, model_info)
                 # torch.save(model.state_dict(), fname)
                 ## or load them from the best model
-                print("Loading encoders")
-                torch.load(fname)
-                models = os.listdir('./models/')
-                for m in models:
-                    prefix = model_info['project_name']+'-FEs'+'_best_model'
-                    if m.startswith(prefix):
-                        model_path = os.path.join('./models/', m)
-                        break
-                print("Loaded model: ", model_path)
-                model.load_state_dict(torch.load(model_path))
+                # print("Loading encoders")
+                # torch.load(fname)
+                # models = os.listdir('./models/')
+                # for m in models:
+                #     prefix = model_info['project_name']+'-FEs'+'_best_model'
+                #     if m.startswith(prefix):
+                #         model_path = os.path.join('./models/', m)
+                #         break
+                # print("Loaded model: ", model_path)
+                # model.load_state_dict(torch.load(model_path))
 
                 #Perform CLIP Eval:
                 print("Evaluating on RGB and IMU CLIP representations")
@@ -918,36 +928,18 @@ def main():
                 camera_only['sensors'] = ['RGB']
 
                 #Then train the model with camera HAR 
-                # print("Training on RGB only")
-                # train(model, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info=camera_only)
+                print("Training on RGB only")
+                train(model, train_2_loader, val_loader, criterion, optimizer, scheduler, args.num_epochs, device, model_info=camera_only)
                 # or load it from the best model
-                print("Loading model RGB trained model")
-                models = os.listdir('./models/')
-                for m in models:
-                    prefix = model_info['project_name']+'_best_model'
-                    if m.startswith(prefix):
-                        model_path = os.path.join('./models/', m)
-                        break
-                print("Loaded model: ", model_path)
-                model.load_state_dict(torch.load(model_path))
-
-                #Finally evaluate on camera, imu, camera+imu
-                imu_only = model_info.copy()
-                imu_only['sensors'] = ['IMU']
-
-                print("Testing on Final Test Dataset")
-
-                print("Evaluating on RGB only")
-                acc = evaluate(model, test_loader, device, model_info=camera_only)
-                print('\tTest accuracy: {:.4f} %'.format(acc))
-
-                print("Evaluating on IMU only")
-                acc = evaluate(model, test_loader, device, model_info=imu_only)
-                print('\tTest accuracy: {:.4f} %'.format(acc))
-
-                print("Evaluating on RGB and IMU")
-                acc = evaluate(model, test_loader, device, model_info=model_info)
-                print('\tTest accuracy: {:.4f} %'.format(acc))
+                # print("Loading model RGB trained model")
+                # models = os.listdir('./models/')
+                # for m in models:
+                #     prefix = model_info['project_name']+'_best_model'
+                #     if m.startswith(prefix):
+                #         model_path = os.path.join('./models/', m)
+                #         break
+                # print("Loaded model: ", model_path)
+                # model.load_state_dict(torch.load(model_path))
 
             elif args.experiment==2:
                 # ----------- EXPERIMENT 2 ----------- 
@@ -958,7 +950,7 @@ def main():
                 print("Training RGB HAR")
                 camera_only = model_info.copy()
                 camera_only['sensors'] = ['RGB']
-                train(model, train_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info=camera_only)
+                train(model, train_loader, val_loader, criterion, optimizer, scheduler, args.num_epochs, device, model_info=camera_only)
 
 
                 # Then Freeze RGB
@@ -967,26 +959,10 @@ def main():
 
                 # Align the representations directly not through cosine similarity
                 print("Aligning Modalities")
-                shared_train(model, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
+                shared_train(model, train_2_loader, val_loader, criterion, optimizer, scheduler, args.num_epochs, device, model_info)
 
                 # torch.save(model.state_dict(), "debug_exp2.pt")
                 
-               #Finally evaluate on camera, imu, camera+imu
-                imu_only = model_info.copy()
-                imu_only['sensors'] = ['IMU']
-
-                print("Evaluating on RGB only")
-                acc = evaluate(model, val_loader, device, model_info=camera_only)
-                print('Test accuracy: {:.4f} %'.format(acc))
-
-                print("Evaluating on IMU only")
-                acc = evaluate(model, val_loader, device, model_info=imu_only)
-                print('Test accuracy: {:.4f} %'.format(acc))
-
-                print("Evaluating on RGB and IMU")
-                acc = evaluate(model, val_loader, device, model_info=model_info)
-                print('Test accuracy: {:.4f} %'.format(acc))
-        
             elif args.experiment==3:
                     # print("In here")
                     # ----------- EXPERIMENT 3 -----------
@@ -994,47 +970,53 @@ def main():
 
                     #Align modalities and train rgb har together
                     print("Aligning Modalities and Training RGB HAR")
-                    inter_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
+                    inter_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, scheduler, args.num_epochs, device, model_info)
 
                     #Perform CLIP Eval:
                     print("Evaluating on RGB and IMU CLIP representations")
                     acc = CLIP_evaluate(model, val_loader, device, model_info)
                     print('\tTest accuracy: {:.4f} %'.format(acc))
 
-                    #Finally evaluate on camera, imu, camera+imu
-                    # eval_log(model, val_loader, device, model_info)
-                    print("Testing on Final Test Dataset")
 
-                    print("Evaluating on RGB only")
-                    acc = evaluate(model, test_loader, device, model_info=camera_only)
-                    print('\tTest accuracy: {:.4f} %'.format(acc))
-
-                    print("Evaluating on IMU only")
-                    acc = evaluate(model, test_loader, device, model_info=imu_only)
-                    print('\tTest accuracy: {:.4f} %'.format(acc))
-
-                    print("Evaluating on RGB and IMU")
-                    acc = evaluate(model, test_loader, device, model_info=model_info)
-                    print('\tTest accuracy: {:.4f} %'.format(acc))
             elif args.experiment==4:
                 # ----------- EXPERIMENT 4 -----------
                 # While training RGB HAR Algin Representations this time within the batch, than evaluate
 
                 #Align modalities and train rgb har together
                 print("Aligning Modalities and Training RGB HAR")
-                intra_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info)
+                intra_train(model, train_loader, train_2_loader, val_loader, criterion, optimizer, scheduler, args.num_epochs, device, model_info)
 
                 #Perform CLIP Eval:
                 print("Evaluating on RGB and IMU CLIP representations")
                 acc = CLIP_evaluate(model, val_loader, device, model_info)
                 print('\tTest accuracy: {:.4f} %'.format(acc))
 
-                #Finally evaluate on camera, imu, camera+imu
-                eval_log(model, val_loader, device, model_info)
+
+            # REGARDLESS OF WHICH EXPERIMENT, END WITH FINAL TESTING:
+                
+            #Finally Test on camera, imu, camera+imu
+            imu_only = model_info.copy()
+            imu_only['sensors'] = ['IMU']
+            camera_only = model_info.copy()
+            camera_only['sensors'] = ['RGB']
+
+            print("\n\nTesting on Final Test Dataset")
+
+            print("Evaluating on RGB only")
+            acc = evaluate(model, test_loader, device, model_info=camera_only)
+            print('\tTest accuracy: {:.4f} %'.format(acc))
+
+            print("Evaluating on IMU only")
+            acc = evaluate(model, test_loader, device, model_info=imu_only)
+            print('\tTest accuracy: {:.4f} %'.format(acc))
+
+            print("Evaluating on RGB and IMU")
+            acc = evaluate(model, test_loader, device, model_info=model_info)
+            print('\tTest accuracy: {:.4f} %'.format(acc))
 
 
         else:
-            train(model, train_loader, val_loader, criterion, optimizer, args.num_epochs, device, model_info=model_info)
+            train(model, train_loader, val_loader, criterion, optimizer, scheduler, args.num_epochs, device, model_info=model_info)
 
 
 if __name__ == '__main__':
