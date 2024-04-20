@@ -10,6 +10,7 @@ from torchvision.models import resnet18, ResNet18_Weights
 from dataset import RGB_IMU_Dataset
 import torchvision.transforms as transforms
 import numpy as np
+import matplotlib.pyplot as plt
 
 # from models import Early_Fusion, Middle_Fusion, Late_Fusion, IMU_MLP, joint_IMU_MLP
 # from train_utils import train, evaluate
@@ -96,7 +97,6 @@ class Early_Fusion(nn.Module):
         self.rgb_model = RGB_Action(hidden_size, rgb_video_length) #here we use hiddent size to connect rgb and imu into one big model
         self.imu_model = IMU_MLP(hidden_size, hidden_size//2, output_size)
 
-
     def forward(self, x):
         # Just flatten, add the data, and unflatten
         shape = x[0].shape
@@ -144,7 +144,6 @@ class RGB_Action(nn.Module):
             nn.ReLU(),
             nn.Linear(512, num_classes)
         )
-
 
     def forward(self, x):
          # Apply ResNet to each frame
@@ -525,29 +524,6 @@ def intra_train(model, train_loader, train_2_loader, val_loader, criterion, opti
                 torch.save(model.state_dict(), fname)
 
 
-def eval_log(model, val_loader, device, model_info):
-    #Finally evaluate on camera->HAR, imu->HAR, camera+imu->HAR
-        imu_only = model_info.copy()
-        imu_only['sensors'] = ['IMU']
-        camera_only = model_info.copy()
-        camera_only['sensors'] = ['RGB']
-
-        print("Evaluating on RGB only")
-        acc = evaluate(model, val_loader, device, model_info=camera_only)
-        if not args.no_wandb: wandb.log({'val_acc'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-        print('Test accuracy RGB: {:.4f} %'.format(acc))
-
-        print("Evaluating on IMU only")
-        acc = evaluate(model, val_loader, device, model_info=imu_only)
-        if not args.no_wandb: wandb.log({'val_acc'+(f'_{imu_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-        print('Test accuracy IMU: {:.4f} %'.format(acc))
-
-        print("Evaluating on RGB and IMU")
-        acc = evaluate(model, val_loader, device, model_info=model_info)
-        if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc})
-        print('Test accuracy: {:.4f} %'.format(acc))
-
-
 # CLIP based cosine similarity representation alignment training
 def CLIP_train(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs, device, model_info):
     model.train()
@@ -662,6 +638,55 @@ def shared_train(model, train_loader, val_loader, criterion, optimizer, schedule
             # now eval imu-> har, rgb->har, and rgb+imu->har
             eval_log(model, val_loader, device, model_info) 
 
+# Define fineutning loop
+def fine_tune(model, tune_loader, test_loader, criterion, optimizer, scheduler, num_epochs, device, model_info):
+    model.train()
+
+    shots = []
+    accs = []
+    # print("len(tune_loader)",len(tune_loader))
+    # print("batch_size",args.batch_size)
+    # print("len(tune_loader)//args.batch_size",len(tune_loader)//args.batch_size)
+    # print("shots", range(len(tune_loader)//args.batch_size))
+    for num_shot in range(len(tune_loader)):
+        for epoch in range(num_epochs):
+            running_loss =0.0
+            for i, data_batch in enumerate(tune_loader):
+                inputs, labels = decouple_inputs(data_batch, model_info, device)
+
+                optimizer.zero_grad()
+                if model_info['fusion_type'] == 'cross_modal':
+                    outputs = model(inputs, model_info['sensors'])
+                else:
+                    inputs=[inputs[0],torch.zeros_like(inputs[1])] #only test rgb
+                    # inputs = [torch.zeros_like(inputs[0]),inputs[1]]
+                    outputs = model(inputs)
+                if len(model_info['tasks']) == 2:
+                    loss = criterion(outputs[0], labels[0].to(device)) + criterion(outputs[1], labels[1].to(device))
+                else:
+                    loss = criterion(outputs, labels.to(device))
+                loss.backward()
+                optimizer.step()
+                # scheduler.step()
+                running_loss += loss.item()
+                if (i+1) % 5 == 0:
+                    print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, len(tune_loader), loss.item()))
+
+                if i==num_shot: break
+        #save the accuracies after finetuning on num_shot batches
+        shots.append((num_shot+1)*args.batch_size)
+        accs.append(eval_log(model, test_loader, device, model_info))
+        
+        print("num_shot:",num_shot,"acc:",accs[-1])
+        # if num_shot==2: # for debugging!
+        #     break 
+    
+    return shots, accs
+
+
+    
+
+
 
 #NOTE: EVALUATION CURRENTLY ASSUMES ONE OUTPUT LABEL
 # Define evaluation loop
@@ -693,6 +718,34 @@ def evaluate(model, val_loader, device, model_info):
             correct += (predicted == labels).sum()
 
         return 100 * correct / total
+
+
+def eval_log(model, val_loader, device, model_info):
+    #Finally evaluate on camera->HAR, imu->HAR, camera+imu->HAR
+    imu_only = model_info.copy()
+    imu_only['sensors'] = ['IMU']
+    camera_only = model_info.copy()
+    camera_only['sensors'] = ['RGB']
+
+    print("Evaluating on RGB only")
+    acc_rgb = evaluate(model, val_loader, device, model_info=camera_only)
+    if not args.no_wandb: wandb.log({'val_acc'+(f'_{camera_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc_rgb})
+    print('Test accuracy RGB: {:.4f} %'.format(acc_rgb))
+
+
+    print("Evaluating on IMU only")
+    acc_imu = evaluate(model, val_loader, device, model_info=imu_only)
+    if not args.no_wandb: wandb.log({'val_acc'+(f'_{imu_only["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc_imu})
+    print('Test accuracy IMU: {:.4f} %'.format(acc_imu))
+
+    print("Evaluating on RGB and IMU")
+    acc_both = evaluate(model, val_loader, device, model_info=model_info)
+    if not args.no_wandb: wandb.log({'val_acc'+(f'_{model_info["sensors"]}' if model_info['fusion_type']== "cross_modal" else ''): acc_both})
+    print('Test accuracy: {:.4f} %'.format(acc_both))
+
+    return acc_rgb.item(), acc_imu.item(), acc_both.item()
+
+
 
 def CLIP_evaluate(model, val_loader, device, model_info):
     model.eval()
@@ -768,6 +821,9 @@ def main():
     parser.add_argument('--lr_step_size', type=int, default=10)
     global args
     args = parser.parse_args()
+
+    if args.test:
+        args.no_wandb = True
 
     # Set the hyperparameters (note most set in argparser above)
     model_info = {
@@ -884,8 +940,28 @@ def main():
                 break
         print("Evaluating model: ", model_path)
         model.load_state_dict(torch.load(model_path))
-        acc = evaluate(model, train_loader, device, model_info=model_info)
-        print('Test accuracy: {:.4f} %'.format(acc))
+        # acc = evaluate(model, test_loader, device, model_info=model_info)
+        # print('Test accuracy: {:.4f} %'.format(acc))
+        # print("Before Finetuning:")
+        # eval_log(model, test_loader, device, model_info=model_info)
+        print("After Finetuning:")
+        shots, accs =  fine_tune(model, val_loader, test_loader, criterion, optimizer, scheduler, 5, device, model_info)
+
+        # Save a plot of shots on the x axis and rgb,imu,both accuracy on the y axis
+        plt.title("Few Shot Learning")
+        accs = np.array(accs)
+        print(accs)
+        print(shots)
+        accs_rgb, accs_imu, accs_both = accs[:,0], accs[:,1], accs[:,2]
+        plt.plot(shots, accs_rgb, label='RGB')
+        plt.plot(shots, accs_imu, label='IMU')
+        plt.plot(shots, accs_both, label='Both')
+        plt.xlabel("Number of Shots")
+        plt.ylabel("Accuracy")
+        plt.legend()
+        plt.savefig(f"{model_info['project_name']}_few_shot.png")
+        
+
     else:
         if model_info['fusion_type'] == 'cross_modal':
             
