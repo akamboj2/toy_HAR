@@ -67,3 +67,132 @@ parameters:
       - SGD
 program: train.py
 
+# exp1: 
+program: train.py
+method: bayes
+metric:
+  goal: maximize
+  name: val_acc_['IMU']
+name: exp1_final
+parameters:
+  device:
+    values:
+      - cuda:0
+  experiment:
+    values:
+      - 1
+  fusion_type:
+    values:
+      - cross_modal
+  hidden_size:
+    values:
+      - 2048
+  learning_rate:
+    distribution: uniform
+    max: 0.1
+    min: 1e-08
+  num_epochs:
+    distribution: int_uniform
+    max: 400
+    min: 20
+  optimizer:
+    values:
+      - Adam
+
+# exp2: 
+program: train.py
+method: bayes
+metric:
+  goal: maximize
+  name: val_acc_['IMU']
+name: exp2_final
+parameters:
+  device:
+    values:
+      - cuda:3
+  experiment:
+    values:
+      - 2
+  fusion_type:
+    values:
+      - cross_modal
+  hidden_size:
+    values:
+      - 2048
+  learning_rate:
+    distribution: uniform
+    max: 0.1
+    min: 1e-08
+  num_epochs:
+    distribution: int_uniform
+    max: 400
+    min: 20
+  optimizer:
+    values:
+      - Adam
+
+
+# exp3: 
+program: train.py
+method: bayes
+metric:
+  goal: maximize
+  name: val_acc_['IMU']
+name: exp3_final
+parameters:
+  device:
+    values:
+      - cuda:0
+  experiment:
+    values:
+      - 3
+  fusion_type:
+    values:
+      - cross_modal
+  hidden_size:
+    values:
+      - 2048
+  learning_rate:
+    distribution: uniform
+    max: 0.1
+    min: 1e-08
+  num_epochs:
+    distribution: int_uniform
+    max: 400
+    min: 20
+  optimizer:
+    values:
+      - Adam
+
+
+# exp4: 
+program: train.py
+method: bayes
+metric:
+  goal: maximize
+  name: val_acc_['IMU']
+name: exp4_final
+parameters:
+  device:
+    values:
+      - cuda:3
+  experiment:
+    values:
+      - 4
+  fusion_type:
+    values:
+      - cross_modal
+  hidden_size:
+    values:
+      - 2048
+  learning_rate:
+    distribution: uniform
+    max: 0.1
+    min: 1e-08
+  num_epochs:
+    distribution: int_uniform
+    max: 400
+    min: 20
+  optimizer:
+    values:
+      - Adam
