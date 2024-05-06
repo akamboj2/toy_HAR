@@ -220,14 +220,14 @@ def plot_all_2d():
     # fig.suptitle('Average Acceleration for Each Action Across 1 Subject and 4 Trials Each')
     for i in range(1, 28):
         # plt.subplot(3, 9, i)
-        plt = plot_users_avg(i, axs[(i-1)//9,(i-1)%9])
+        plot_users_avg(i, axs[(i-1)//9,(i-1)%9])
         # plt = plot_trials_avg(i, 1, axs[(i-1)//9,(i-1)%9])
         # plt = plot_one(i, 1, axs[(i-1)//9,(i-1)%9])  # always plot subject 1
     
     fig.savefig(f"plots/scratch/{name}.png")
 
 
-def plot_position(action, subject, ax = None):
+def plot_position(action, subject, ax = None, point = None, frame = 0):
 
     accel_x, accel_y, accel_z, time = get_data(action=action, subject=subject, trim=True)
 
@@ -254,26 +254,33 @@ def plot_position(action, subject, ax = None):
 
     
     # Plot position animation
-    if not ax:
+    if not ax: # if ax is none, we are just plotting this one animation
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-    else:
-        ax = ax.add_subplot(111, projection='3d')
-    point, = ax.plot([], [], [], color='r', marker=".")
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-    ax.set_title('Position from Acceleration')
+        
+        point, = ax.plot([], [], [], color='r', marker=".")
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        ax.set_title('Position from Acceleration')
+        
+        def update(frame):
+            point.set_data(pos_x[frame], pos_y[frame])
+            point.set_3d_properties(pos_z[frame])
+            ax.set_xlim(min(pos_x), max(pos_x))
+            ax.set_ylim(min(pos_y), max(pos_y))
+            ax.set_zlim(min(pos_z), max(pos_z))
 
-    def update(frame):
+        ani = FuncAnimation(fig, update, frames=len(pos_x), interval=30)
+        ani.save("plots/scratch/position_animation.gif", writer='pillow')
+        # plt.savefig(f"plots/scratch/position_a{action}_s{subject}.png")
+
+    else: # if ax is not none, we are updating the given animation
         point.set_data(pos_x[frame], pos_y[frame])
         point.set_3d_properties(pos_z[frame])
         ax.set_xlim(min(pos_x), max(pos_x))
         ax.set_ylim(min(pos_y), max(pos_y))
         ax.set_zlim(min(pos_z), max(pos_z))
-
-    ani = FuncAnimation(fig, update, frames=len(pos_x), interval=30)
-    ani.save("plots/scratch/position_animation.gif", writer='pillow')
 
 
 def plot_all_3d():
@@ -281,16 +288,36 @@ def plot_all_3d():
     fig.suptitle('Position of Accelerometer Data in 3D Space')
 
     fig, axs = plt.subplots(3, 9, figsize=(50, 15))
+    points = []
 
+    # Intialize All the Points
     for i in range(1, 28):
+        # ax = axs[(i-1)//9,(i-1)%9]
+        # ax = fig.add_subplot(111, projection='3d')
+        axs[(i-1)//9,(i-1)%9] = fig.add_subplot(3, 9, i, projection='3d')
+        ax = axs[(i-1)//9,(i-1)%9]
+        point, = ax.plot([], [], [], color='r', marker=".")
+        points.append(point)
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        ax.set_title(actions_dict[i])
+
+    # Now every call to update is gonna update each of the points
+    def update(frame):
+        for i in range(1, 28):
+            plot_position(i, 1, axs[(i-1)//9,(i-1)%9], points[i-1], frame)
+
+    ani = FuncAnimation(fig, update, frames=180, interval=30)
+    ani.save("plots/scratch/position_animation_all_plots.gif", writer='pillow')
 
 
 
 if __name__ == "__main__":
     # Loop through and call plot one for a1-a27
 
-    plot_all_2d()
-    # plot_all_3d()
+    # plot_all_2d()
+    plot_all_3d()
 
 
 

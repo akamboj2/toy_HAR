@@ -1,5 +1,14 @@
 from IMU_VAE import *
 
+"""
+What's the goal here?
+Try to learn k-means clustering on latent space of VAE
+with k=28
+
+and see if those k clusters correspond to the different actions
+"""
+
+
 if __name__=='__main__':
     """ NOTE: This main function was just for debugging let's import and train this in train.py"""
     
