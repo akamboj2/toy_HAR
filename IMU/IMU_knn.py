@@ -37,3 +37,4 @@ if __name__=='__main__':
     # 172*689 = 118348
     print("Total number of comparisons:", 118348)
     print("Estimated Time:", 118348*execution_time/60, "minutes")
+    # 2863 minutes, e.g. 35.6 hours
