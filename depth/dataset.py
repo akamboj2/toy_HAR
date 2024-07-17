@@ -4,9 +4,8 @@ from torch.utils.data import Dataset
 from torchvision.io import read_video
 from torchvision.transforms.functional import normalize
 import torch.nn.utils.rnn as rnn_utils
-import scipy.io
 
-
+# taken from FACT - modify for multimodal dataset
 class RGB_IMU_Dataset(Dataset):
     def __init__(self, split_file, video_length=50, imu_length=180, transform=None, base_path ="/home/abhi/data/utd-mhad/", return_path=False):
         self.split_file = split_file
@@ -88,20 +87,3 @@ class RGB_IMU_Dataset(Dataset):
             return frames, accel_data, class_idx, pid_idx, rgb_path, imu_path
         else:
             return frames, accel_data, class_idx, pid_idx #returns TCHW video
-
-if __name__=='__main__':
-    dir = "/home/abhi/data/utd-mhad/Both_splits/both_80_20_#1/train.txt"
-    dir = "/home/abhi/data/utd-mhad/Both_splits/both_80_20_#1/val.txt"
-    
-    d = RGB_IMU_Dataset(dir)
-    
-    video_lengths = []
-    for itm in d:
-        print("Input RGB:", itm[0].shape, "Input IMU:", itm[1].shape, "action label:", itm[2], "PID label:", itm[3])
-        video_lengths.append(itm[0].shape[0])
-        continue
-
-    print(len(d))
-    print("average video length:", sum(video_lengths)/len(video_lengths))
-    # average video length: 52.55668604651163 (in training)
-    
