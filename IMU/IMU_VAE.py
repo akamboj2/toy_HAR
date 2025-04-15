@@ -125,7 +125,7 @@ if __name__=='__main__':
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     epochs=500 #1000
-    latent_dims= 4 #512
+    latent_dims= 512
     batch_size = 32 #lower bs seems to decrease mse loss and increase kl loss
     beta = 1/2000 #weight of kl divergence
     """
@@ -135,7 +135,7 @@ if __name__=='__main__':
     104, mse 93, kl 11: 100,2, 32
     """
      # Load dataset
-    dir = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1/train.txt"
+    dir = "/home/akamboj2/data/utd-mhad/Inertial_splits/action_80_20_#1/train.txt"
     # dir = "/home/abhi/data/USC-HAD/splits/train.txt"
     train_dataset = IMUDataset(dir, dataset_name="UTD")
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
@@ -166,7 +166,7 @@ if __name__=='__main__':
         param.requires_grad = False
 
     #Test VAE model on unseen data
-    val_dir = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1/val.txt"
+    val_dir = "/home/akamboj2/data/utd-mhad/Inertial_splits/action_80_20_#1/val.txt"
     # val_dir = "/home/abhi/data/USC-HAD/splits/val.txt"
     val_dataset = IMUDataset(val_dir, time_invariance_test=False, dataset_name="UTD")
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
@@ -211,7 +211,7 @@ if __name__=='__main__':
     
     # Test model
     datapath = "Inertial_splits/action_80_20_#1"
-    val_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"val.txt")
+    val_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"val.txt")
     val_dataset = IMUDataset(val_dir, time_invariance_test=False)
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
 

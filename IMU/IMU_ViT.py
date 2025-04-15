@@ -1,3 +1,9 @@
+"""
+NOTE: For ViT to work with imu i had to copy the vision_transformer.py file from the pytorch library and make some changes to it.
+Thus i import it as custom_vision_transformer.py
+"""
+
+
 import torch
 import torch.nn as nn
 import torch.optim as optim

@@ -24,7 +24,7 @@ if __name__=='__main__':
     104, mse 93, kl 11: 100,2, 32
     """
      # Load dataset
-    dir = "/home/abhi/data/utd-mhad/Inertial_splits/action_80_20_#1/train.txt"
+    dir = "/home/akamboj2/data/utd-mhad/Inertial_splits/action_80_20_#1/train.txt"
     # dir = "/home/abhi/data/USC-HAD/splits/train.txt"
     train_dataset = IMUDataset(dir, dataset_name="UTD")
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
@@ -72,7 +72,7 @@ if __name__=='__main__':
     #Now test on test set
     # Test model
     datapath = "Inertial_splits/action_80_20_#1"
-    val_dir = os.path.join("/home/abhi/data/utd-mhad/",datapath,"val.txt")
+    val_dir = os.path.join("/home/akamboj2/data/utd-mhad/",datapath,"val.txt")
     val_dataset = IMUDataset(val_dir, time_invariance_test=False)
     # val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
 
@@ -95,6 +95,7 @@ if __name__=='__main__':
             correct += 1
 
     print("Accuracy: ", 100*correct/len(val_dataset), "%")
+    # During validation getting a 40% accuracy
     
     
 
