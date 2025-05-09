@@ -126,7 +126,7 @@ if __name__=='__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     epochs=500 #1000
     latent_dims= 512
-    batch_size = 32 #lower bs seems to decrease mse loss and increase kl loss
+    batch_size = 128 #lower bs seems to decrease mse loss and increase kl loss
     beta = 1/2000 #weight of kl divergence
     """
     total 370, 93, 277: 100,50, 32
